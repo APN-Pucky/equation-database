@@ -50,10 +50,19 @@ extensions = [
 ]
 
 autosummary_generate = True
-
+autosummary_generate_imported = True
+autosummary_private_members = True
+autosummary_imported_members = True
 autoapi_type = "python"
 autoapi_dirs = ["../../equation_database"]
 autoapi_python_class_content = "both"
+
+autodoc_default_options = {
+    'private-members': True,
+    'inherited-members': True,
+    'special-members': True,
+}
+
 
 
 templates_path = ['_templates']

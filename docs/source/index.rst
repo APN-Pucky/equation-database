@@ -12,15 +12,15 @@
 .. include:: ../../README.md
    :parser: myst_parser.sphinx_
 
- 
+
 
 
 :mod:`equation-database` package
 ================================
 .. autosummary::
-   :toctree: _autosummary
-   :template: custom-module-template.rst
+   :toctree: _autosummary 
    :recursive:
+   :template: custom-module-template.rst
    :caption: Modules:
 
    equation_database

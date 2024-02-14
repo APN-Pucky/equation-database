@@ -3,9 +3,9 @@
 .. currentmodule:: {{ module }}
 
 .. autoclass:: {{ objname }}
-   :members:                                   
+   :members:                                    
    :show-inheritance:                           
-   :inherited-members:                         
+   :inherited-members:                          
 
    {% block methods %}
    .. automethod:: __init__
@@ -30,3 +30,4 @@
    {%- endfor %}
    {% endif %}
    {% endblock %}
+
