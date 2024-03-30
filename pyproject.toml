@@ -6,7 +6,7 @@ authors = ["Alexander Puck Neuwirth <alexander@neuwirth-informatik.de>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.8"
 sympy = "*"
 
 [tool.poetry.group.test]
