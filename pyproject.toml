@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "equation-database"
-version = "2024.2.14"
+version = "2024.3.30"
 description = "A collection of equations"
 authors = ["Alexander Puck Neuwirth <alexander@neuwirth-informatik.de>"]
 readme = "README.md"
@@ -18,8 +18,6 @@ pytest-cov =  "*"
 pytest-profiling =  "*"
 pytest-line-profiler-apn = ">=0.1.3"
 
-
-
 [tool.poetry.group.docs]
 optional = true
 
@@ -35,7 +33,6 @@ sphinx_math_dollar = "*"
 myst-parser  = "*"
 toml = "*"
 
-
 [tool.poetry.group.dev]
 optional = true
 
@@ -48,3 +45,14 @@ jupyter = "*"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+addopts = [
+"-Werror","-v","--doctest-modules","--ignore=docs/source/conf.py"
+]
+filterwarnings = [
+    'error',
+    'ignore: pkg_resources is deprecated as an API:DeprecationWarning'
+]

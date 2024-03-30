@@ -9,7 +9,7 @@ Reference:
 
 """
 t = sympy.Symbol('t')
-"""Mandelstam variable t"""
+"""Mandelstam variable t (See :py:obj:`equation_database.doi_10_1103_physrev_176_1700.t`)"""
 u = sympy.Symbol('u')
 """Mandelstam variable u"""
 B = sympy.Symbol('B') 
@@ -41,7 +41,8 @@ equation_2_6 = sympy.Eq(2*sympy.re(M_s*sympy.conjugate(M_u)), g_s**2 * C_A *C_F 
 equation_2_8 = sympy.Eq(sympy.Abs(M)**2, (equation_2_4.lhs + equation_2_5.lhs + equation_2_6.lhs )/96)
 """Equation (2.8)"""
 
-bibtex : str = """@article{Fiaschi:2022odp,
+bibtex : str = """
+@article{Fiaschi:2022odp,
     author = "Fiaschi, Juri and Fuks, Benjamin and Klasen, Michael and Neuwirth, Alexander",
     title = "{Soft gluon resummation for associated squark-electroweakino production at the LHC}",
     eprint = "2202.13416",
@@ -53,5 +54,6 @@ bibtex : str = """@article{Fiaschi:2022odp,
     volume = "06",
     pages = "130",
     year = "2022"
-}"""
+}
+"""
 """Bibtex citation"""
