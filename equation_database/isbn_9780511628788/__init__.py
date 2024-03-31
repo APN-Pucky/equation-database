@@ -22,13 +22,14 @@ table_7_1_gq_gq = frac("-4/9")  * (s**2+u**2)/(s*u) + (u**2+s**2)/t**2
 table_7_1_gg_gg = frac("9/2")  * (3 - t*u/s**2 - s*u/t**2 - s*t/u**2)
 
 bibtex : str = """
-@book{Ellis_Stirling_Webber_1996,
-    place={Cambridge},
-    series={Cambridge Monographs on Particle Physics, Nuclear Physics and Cosmology},
-    title={QCD and Collider Physics},
-    publisher={Cambridge University Press},
-    author={Ellis, R. K. and Stirling, W. J. and Webber, B. R.},
-    year={1996}, collection={Cambridge Monographs on Particle Physics,
-    Nuclear Physics and Cosmology}
-} 
+@book{Ellis:1996mzs,
+    author = "Ellis, R. Keith and Stirling, W. James and Webber, B. R.",
+    title = "{QCD and collider physics}",
+    doi = "10.1017/CBO9780511628788",
+    isbn = "978-0-511-82328-2, 978-0-521-54589-1",
+    publisher = "Cambridge University Press",
+    volume = "8",
+    month = "2",
+    year = "2011"
+}
 """

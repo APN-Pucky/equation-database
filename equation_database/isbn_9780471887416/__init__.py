@@ -19,16 +19,9 @@ equation_6_113 = 2*e**4 * (- u/s - s/u)
 
 bibtex : str = """
 @book{Halzen:1984mc,
-  added-at = {2009-01-13T13:43:30.000+0100},
-  address = {New York, USA},
-  author = {Halzen, Francis and Martin, Alan},
-  biburl = {https://www.bibsonomy.org/bibtex/25aff683e444ad48a1a6b91fce38498fb/clange},
-  interhash = {0f0942dd05c5962377caa1eb7519cd9c},
-  intrahash = {5aff683e444ad48a1a6b91fce38498fb},
-  keywords = {textbook},
-  publisher = {John Wiley \& Sons},
-  timestamp = {2012-04-23T15:13:29.000+0200},
-  title = {Quarks \& Leptons: An introductory course in modern particle physics},
-  year = 1984
+    author = "Halzen, F. and Martin, Alan D.",
+    title = "{QUARKS AND LEPTONS: AN INTRODUCTORY COURSE IN MODERN PARTICLE PHYSICS}",
+    isbn = "978-0-471-88741-6",
+    year = "1984"
 }
 """
