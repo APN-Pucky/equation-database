@@ -29,7 +29,7 @@ N = sympy.Symbol('N')
 """Number of colors"""
 
 table_7_2 = {
-    "quark_antiquark_to_gammastar_gluon" :  (N**2-1)/N**2 * (t**2+u**2 + 2*s * (s+t+u))/(t*u),
+    "quark_quarkbar_to_gammastar_gluon" :  (N**2-1)/N**2 * (t**2+u**2 + 2*s * (s+t+u))/(t*u),
     "gluon_quark_to_gammastar_quark"     : - 1/N * (s**2 + u**2 + s*t*(s+t+u)/(s*u)),
 }
 """Lowest order processes for virtual photon production. The colour and spin indices are averaged (summed) over initial (final) states. For a real photon (s +1 + u) = 0 and for SU(3) we have N = 3"""
