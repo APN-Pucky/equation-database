@@ -17,6 +17,18 @@ equation_6_31 = 2*e**4 * (t**2 + u **2)/s**2
 equation_6_113 = 2*e**4 * (- u/s - s/u)
 """spin averaged Compton amplitude"""
 
+N = sympy.Symbol('N')
+"""Number of colors"""
+x_q = sympy.Symbol('x_q')
+"""Quark momentum fraction"""
+x_qbar = sympy.Symbol('x_qbar')
+"""Antiquark momentum fraction"""
+x_g = sympy.Symbol('x_g')
+"""Gluon momentum fraction"""
+
+equation_11_35 = N * (x_q**2 + x_qbar**2)/((1-x_q)*(1-x_qbar))
+"""spin and color averaged matrix element for electron-positron annihilation into quark-antiquark-gluon final state"""
+
 bibtex : str = """
 @book{Halzen:1984mc,
     author = "Halzen, F. and Martin, Alan D.",
