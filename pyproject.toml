@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "equation-database"
-version = "2024.4.2"
+version = "2024.4.4"
 description = "A collection of equations"
 authors = ["Alexander Puck Neuwirth <alexander@neuwirth-informatik.de>"]
 readme = "README.md"
@@ -50,7 +50,7 @@ build-backend = "poetry.core.masonry.api"
 minversion = "6.0"
 testpaths = ["tests"]
 addopts = [
-"-Werror","-v","--doctest-modules","--ignore=docs/source/conf.py"
+    "-Werror","-v","--doctest-modules","--ignore=docs/source/conf.py"
 ]
 filterwarnings = [
     'error',
