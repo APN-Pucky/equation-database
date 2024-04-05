@@ -34,6 +34,17 @@ table_7_2 = {
 }
 """Lowest order processes for virtual photon production. The colour and spin indices are averaged (summed) over initial (final) states. For a real photon (s +1 + u) = 0 and for SU(3) we have N = 3"""
 
+# Backwards compatibility
+table_7_1_qqp_qqp =  table_7_1["quark_quarkprime_to_quark_quarkprime"]
+table_7_1_qqpb_qqpb = table_7_1["quark_quarkprimebar_to_quark_quarkprimebar"]
+table_7_1_qq_qq = table_7_1["quark_quark_to_quark_quark"]
+table_7_1_qqb_qpqpb = table_7_1["quark_quarkbar_to_quarkprime_quarkprimebar"]
+table_7_1_qqb_qqb = table_7_1["quark_quarkbar_to_quark_quarkbar"]
+table_7_1_qqb_gg = table_7_1["quark_quarkbar_to_gluon_gluon"]
+table_7_1_gg_qqb = table_7_1["gluon_gluon_to_quark_quarkbar"]
+table_7_1_gq_gq = table_7_1 ["gluon_quark_to_gluon_quark"]
+table_7_1_gg_gg = table_7_1["gluon_gluon_to_gluon_gluon"]
+
 bibtex : str = """
 @book{Ellis:1996mzs,
     author = "Ellis, R. Keith and Stirling, W. James and Webber, B. R.",
@@ -46,14 +57,3 @@ bibtex : str = """
     year = "2011"
 }
 """
-
-# Backward compatibility
-table_7_1_qqp_qqp =  table_7_1["quark_quarkprime_to_quark_quarkprime"]
-table_7_1_qqpb_qqpb = table_7_1["quark_quarkprimebar_to_quark_quarkprimebar"]
-table_7_1_qq_qq = table_7_1["quark_quark_to_quark_quark"]
-table_7_1_qqb_qpqpb = table_7_1["quark_quarkbar_to_quarkprime_quarkprimebar"]
-table_7_1_qqb_qqb = table_7_1["quark_quarkbar_to_quark_quarkbar"]
-table_7_1_qqb_gg = table_7_1["quark_quarkbar_to_gluon_gluon"]
-table_7_1_gg_qqb = table_7_1["gluon_gluon_to_quark_quarkbar"]
-table_7_1_gq_gq = table_7_1 ["gluon_quark_to_gluon_quark"]
-table_7_1_gg_gg = table_7_1["gluon_gluon_to_gluon_gluon"]

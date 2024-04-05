@@ -18,7 +18,7 @@ equation_6_113 = 2*e**4 * (- u/s - s/u)
 """spin averaged Compton amplitude"""
 
 N = sympy.Symbol('N')
-"""Number of colors"""
+"""Normalization factor"""
 x_q = sympy.Symbol('x_q')
 """Quark momentum fraction"""
 x_qbar = sympy.Symbol('x_qbar')
