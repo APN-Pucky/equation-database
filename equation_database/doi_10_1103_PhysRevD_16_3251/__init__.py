@@ -1,5 +1,7 @@
 import sympy
 
+from equation_database.util.doc import bib, equation
+
 x_1 = sympy.Symbol('x_1')
 """quark momentum fraction"""
 x_2 = sympy.Symbol('x_2')
@@ -25,11 +27,15 @@ equation_2_8 = sympy.Eq(
     sigma_pt,
     4* sympy.pi * alpha**2 / Q**2 * sum_e_q_squared
 )
+@equation()
+def get_equation_2_8(): return equation_2_8
 
 equation_2_9 = sympy.Eq(
   sympy.Derivative(sigma, x_1, x_2)/sigma_pt,
   2*alpha_C/3/sympy.pi * (x_1**2 + x_2**2)/((1-x_1)*(1-x_2))
 )
+@equation()
+def get_equation_2_9(): return equation_2_9
 
 bibtex : str = """
 @article{DeGrand:1977sy,
@@ -43,3 +49,6 @@ bibtex : str = """
     year = "1977"
 }
 """
+@bib()
+def get_bibtex(): 
+    return bibtex

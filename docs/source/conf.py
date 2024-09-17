@@ -21,9 +21,9 @@ try:
     info = toml.load("../../pyproject.toml")
 except FileNotFoundError:
     info = toml.load("pyproject.toml")
-project = info["tool"]["poetry"]["name"]
+project = info["project"]["name"]
 copyright = str(datetime.datetime.now().year) + ", Alexander Puck Neuwirth"
-author = ", ".join(info["tool"]["poetry"]["authors"])
+author = "Alexander Puck Neuwirth"
 version = re.sub("^", "", os.popen("git describe --tags").read().strip())
 rst_epilog = f""".. |project| replace:: {project} \n\n"""
 
@@ -35,12 +35,12 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.githubpages",
     "sphinx.ext.viewcode",
+    "sphinx_math_dollar",
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",
     "sphinx.ext.doctest",
-    "matplotlib.sphinxext.plot_directive",
+    #"matplotlib.sphinxext.plot_directive",
     #'numpydoc',
-    "sphinx_math_dollar",
     "sphinx.ext.autosummary",
     "sphinx.ext.coverage",
     "nbsphinx",
@@ -48,6 +48,20 @@ extensions = [
     #'jupyter_sphinx.execute'
     # "autoapi.extension",
 ]
+
+mathjax_config = {
+    'tex2jax': {
+        'inlineMath': [ ["\\(","\\)"] ],
+        'displayMath': [["\\[","\\]"] ],
+    },
+}
+
+mathjax3_config = {
+  "tex": {
+    "inlineMath": [['\\(', '\\)']],
+    "displayMath": [["\\[", "\\]"]],
+  }
+}
 
 autosummary_generate = True
 autosummary_generate_imported = True
@@ -68,7 +82,39 @@ autodoc_default_options = {
 templates_path = ['_templates']
 exclude_patterns = []
 
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the directory is relative to the
+# documentation root, use os.path.abspath to make it absolute, like shown here.
+# https://github.com/sympy/sphinx-math-dollar/issues/18
+from docutils.nodes import (
+    doctest_block,
+    image,
+    literal,
+    literal_block,
+    math,
+    math_block,
+    pending,
+    raw,
+    rubric,
+    substitution_definition,
+    target,
+)
 
+
+math_dollar_node_blacklist = (
+    literal,
+    math,
+    doctest_block,
+    image,
+    literal_block,
+    math_block,
+    pending,
+    raw,
+    rubric,
+    substitution_definition,
+    target,
+)  # (FixedTextElement,math)
+# print(NODE_BLACKLIST)
 
 
 

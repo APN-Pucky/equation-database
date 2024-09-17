@@ -1,4 +1,5 @@
 import sympy
+from equation_database.util.doc import bib, equation, table
 from equation_database.util.parse import frac
 
 
@@ -22,8 +23,10 @@ table_7_1= {
     "gluon_quark_to_gluon_quark"                 : frac("-4/9")  * (s**2+u**2)/(s*u) + (u**2+s**2)/t**2,
     "gluon_gluon_to_gluon_gluon"                 : frac("9/2")   * (3 - t*u/s**2 - s*u/t**2 - s*t/u**2),
 }
-"""The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states."""
-
+@table()
+def get_table_7_1():
+    """The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states."""
+    return table_7_1
 
 N = sympy.Symbol('N')
 """Number of colors"""
@@ -36,14 +39,50 @@ table_7_2 = {
 
 # Backwards compatibility
 table_7_1_qqp_qqp =  table_7_1["quark_quarkprime_to_quark_quarkprime"]
+@equation()
+def get_table_7_1_qqp_qqp(): 
+    "$qq' \\to qq'$"
+    return table_7_1_qqp_qqp
 table_7_1_qqpb_qqpb = table_7_1["quark_quarkprimebar_to_quark_quarkprimebar"]
+@equation()
+def get_table_7_1_qqpb_qqpb(): 
+    "$q\\bar{q}' \\to q\\bar{q}'$"
+    return table_7_1_qqpb_qqpb
 table_7_1_qq_qq = table_7_1["quark_quark_to_quark_quark"]
+@equation()
+def get_table_7_1_qq_qq():
+    "$qq \\to qq$"
+    return table_7_1_qq_qq
 table_7_1_qqb_qpqpb = table_7_1["quark_quarkbar_to_quarkprime_quarkprimebar"]
+@equation()
+def get_table_7_1_qqb_qpqpb():
+    "$q\\bar{q} \\to q'\\bar{q}'$"
+    return table_7_1_qqb_qpqpb
 table_7_1_qqb_qqb = table_7_1["quark_quarkbar_to_quark_quarkbar"]
+@equation()
+def get_table_7_1_qqb_qqb():
+    "$q\\bar{q} \\to q\\bar{q}$"
+    return table_7_1_qqb_qqb
 table_7_1_qqb_gg = table_7_1["quark_quarkbar_to_gluon_gluon"]
+@equation()
+def get_table_7_1_qqb_gg():
+    "$q\\bar{q} \\to gg$"
+    return table_7_1_qqb_gg
 table_7_1_gg_qqb = table_7_1["gluon_gluon_to_quark_quarkbar"]
+@equation()
+def get_table_7_1_gg_qqb():
+    "$gg \\to q\\bar{q}$"
+    return table_7_1_gg_qqb
 table_7_1_gq_gq = table_7_1 ["gluon_quark_to_gluon_quark"]
+@equation()
+def get_table_7_1_gq_gq():
+    "$gq \\to gq$"
+    return table_7_1_gq_gq
 table_7_1_gg_gg = table_7_1["gluon_gluon_to_gluon_gluon"]
+@equation()
+def get_table_7_1_gg_gg():
+    "$gg \\to gg$"
+    return table_7_1_gg_gg
 
 bibtex : str = """
 @book{Ellis:1996mzs,
@@ -57,3 +96,6 @@ bibtex : str = """
     year = "2011"
 }
 """
+@bib()
+def get_bibtex(): 
+    return bibtex

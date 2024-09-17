@@ -1,50 +1,59 @@
-[tool.poetry]
-name = "equation-database"
-version = "2024.4.5"
-description = "A collection of equations"
-authors = ["Alexander Puck Neuwirth <alexander@neuwirth-informatik.de>"]
-readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.8"
-sympy = "*"
-
-[tool.poetry.group.test]
-optional = true
-
-[tool.poetry.group.test.dependencies]
-pytest = "*"
-pytest-cov =  "*"
-pytest-profiling =  "*"
-pytest-line-profiler-apn = ">=0.1.3"
-
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-sphinx = "<7.0.0"
-sphinx-rtd-theme = "*"
-sphinxcontrib-napoleon = "*"
-nbsphinx = "*"
-jupyter-sphinx = "*"
-sphinx_autobuild = "*"
-sphinx-autoapi = "*"
-sphinx_math_dollar = "*"
-myst-parser  = "*"
-toml = "*"
-
-[tool.poetry.group.dev]
-optional = true
-
-[tool.poetry.group.dev.dependencies]
-pre-commit = ">=2.20,<4.0"
-ipython =  "*"
-jupyterlab =  "*"
-jupyter = "*"
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "equation-database"
+description = "A collection of equations"
+readme = { file = "README.md" , content-type = "text/markdown" }
+authors = [ { name = "Alexander Puck Neuwirth", email = "alexander@neuwirth-informatik.de" } ]
+maintainers = [{ name = "Alexander Puck Neuwirth", email = "alexander@neuwirth-informatik.de" }]
+# TODO classifiers and keywords
+
+requires = { python = "^3.8" }
+dependencies = [ 
+    "sympy"
+    ]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-profiling",
+    "pytest-line-profiler-apn"
+]
+
+docs = [
+    "sphinx <7.0.0",
+    "sphinx-rtd-theme",
+    "sphinxcontrib-napoleon",
+    "nbsphinx",
+    "jupyter-sphinx",
+    "sphinx_autobuild",
+    "sphinx-autoapi",
+    "sphinx_math_dollar",
+    "myst-parser",
+    "toml"
+]
+
+dev = [
+    "pre-commit >=2.20,<4.0",
+    "ipython",
+    "jupyterlab",
+    "jupyter"
+]
+
+[tool.hatch.envs.full]
+features = [
+  "dev",
+  "docs",
+  "test",
+]
+
+[tool.hatch]
+version.source = "vcs"
+#build.hooks.vcs.version-file = "src/equation_database/version.py"
 
 [tool.pytest.ini_options]
 minversion = "6.0"

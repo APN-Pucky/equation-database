@@ -1,5 +1,7 @@
 import sympy
 
+from equation_database.util.doc import bib, equation
+
 s = sympy.Symbol('s')
 """
 Mandelstam variable s
@@ -33,13 +35,22 @@ M = sympy.Symbol('M')
 
 
 equation_2_4 = sympy.Eq(sympy.Abs(M_s)**2 , g_s**2 * C_A*C_F * B / s *2 * (m_X**2 -t))
-"""Equation (2.4)"""
+@equation()
+def get_equation_2_4(): 
+    """a"""
+    return equation_2_4
+
 equation_2_5 = sympy.Eq(sympy.Abs(M_u)**2 , g_s**2 * C_A *C_F *B/(u - m_sq**2)**2 * 2 * ( m_X**2- u) * ( m_sq**2+u))
-"""Equation (2.5)"""
+@equation()
+def get_equation_2_5(): return equation_2_5
+
 equation_2_6 = sympy.Eq(2*sympy.re(M_s*sympy.conjugate(M_u)), g_s**2 * C_A *C_F * B /(s*(u-m_sq**2)) * ( 2 * (m_X**4- m_sq**4) + m_sq**2 * ( 2*u -3*s) -2*m_X **2 * ( 2*m_sq**2 +u) -s*u) )
-"""Equation (2.6)"""
+@equation()
+def get_equation_2_6(): return equation_2_6
+
 equation_2_8 = sympy.Eq(sympy.Abs(M)**2, (equation_2_4.lhs + equation_2_5.lhs + equation_2_6.lhs )/96)
-"""Equation (2.8)"""
+@equation()
+def get_equation_2_8(): return equation_2_8
 
 bibtex : str = """
 @article{Fiaschi:2022odp,
@@ -56,4 +67,6 @@ bibtex : str = """
     year = "2022"
 }
 """
-"""Bibtex citation"""
+@bib()
+def get_bibtex(): 
+    return bibtex

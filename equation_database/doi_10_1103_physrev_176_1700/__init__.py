@@ -1,5 +1,7 @@
 import sympy
 
+from equation_database.util.doc import bib, equation
+
 s = sympy.symbols('s')
 """Mandelstam variable s"""
 
@@ -23,13 +25,15 @@ equation_A3 = (
         sympy.Eq(U_mu, (p1_mu - p3_mu)), sympy.Eq(U_mu, (p4_mu - p2_mu)),
         sympy.Eq(T_mu, (p1_mu - p4_mu)), sympy.Eq(T_mu, (p3_mu - p2_mu)),
     )
-"""Equation A3:"""
+@equation()
+def get_equation_A3(): return equation_A3
 
 equation_A4 = sympy.Eq(s, S_mu**2),sympy.Eq(t, T_mu**2),sympy.Eq(u, U_mu**2),
-"""Equation A4:"""
+@equation()
+def get_equation_A4(): return equation_A4
 
 bibtex : str = """
-@article{Balachandran:1968rj,
+@article{Balachandran:1968rj, 
     author = "Balachandran, A. P. and Nuyts, J. and Meggs, W. J. and Ramond, Pierre",
     title = "{Simultaneous partial wave expansion in the Mandelstam variables: the group SU(3)}",
     doi = "10.1103/PhysRev.176.1700",
@@ -39,4 +43,6 @@ bibtex : str = """
     year = "1968"
 }
 """
-"""Bibtex citation"""
+@bib()
+def get_bibtex(): 
+    return bibtex

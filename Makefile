@@ -1,11 +1,11 @@
 livehtml:
-	poetry run $(MAKE) -C docs livehtml
+	hatch run full:$(MAKE) -C docs livehtml
 
 html:
-	poetry run $(MAKE) -C docs html
+	hatch run full:$(MAKE) -C docs html
 
 pdf:
-	poetry run $(MAKE) -C docs latexpdf
+	hatch run full:$(MAKE) -C docs latexpdf
 	
 doc: html
 
