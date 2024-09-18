@@ -10,15 +10,15 @@ pdf:
 doc: html
 
 install:
-	poetry install --with docs --with dev --with test
+	hatch env create
 	python3 -m pip install --user .
 
 build:
-	python -m build
+	hatch build
 
 test:
 	rm -f .coverage coverage.xml
-	poetry run pytest
+	hatch test
 
 commit:
 	-git add .
