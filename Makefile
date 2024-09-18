@@ -14,7 +14,7 @@ install:
 	python3 -m pip install --user .
 
 build:
-	poetry build
+	python -m build
 
 test:
 	rm -f .coverage coverage.xml
