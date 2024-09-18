@@ -31,7 +31,8 @@ rst_epilog = f""".. |project| replace:: {project} \n\n"""
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    "myst_parser",
+    'sphinx.ext.napoleon',
+    #"myst_parser",
     "sphinx.ext.autodoc",
     "sphinx.ext.githubpages",
     "sphinx.ext.viewcode",
@@ -48,33 +49,20 @@ extensions = [
     #'jupyter_sphinx.execute'
     # "autoapi.extension",
 ]
-
-mathjax_config = {
-    'tex2jax': {
-        'inlineMath': [ ["\\(","\\)"] ],
-        'displayMath': [["\\[","\\]"] ],
-    },
-}
-
-mathjax3_config = {
-  "tex": {
-    "inlineMath": [['\\(', '\\)']],
-    "displayMath": [["\\[", "\\]"]],
-  }
-}
+napoleon_google_docstring = True
 
 autosummary_generate = True
 autosummary_generate_imported = True
 autosummary_private_members = True
-autosummary_imported_members = True
+autosummary_imported_members = False
 autoapi_type = "python"
 autoapi_dirs = ["../../equation_database"]
 autoapi_python_class_content = "both"
 
 autodoc_default_options = {
-    'private-members': True,
+    'private-members': False,
     'inherited-members': True,
-    'special-members': True,
+    'special-members': False,
 }
 
 
@@ -121,6 +109,6 @@ math_dollar_node_blacklist = (
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+#html_theme = 'alabaster'
 html_theme = "sphinx_rtd_theme"
 html_static_path = ['_static']

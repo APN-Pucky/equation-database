@@ -3,86 +3,231 @@ from equation_database.util.doc import bib, equation, table
 from equation_database.util.parse import frac
 
 
-s = sympy.Symbol('s')
-"""Mandelstam variable s"""
-t = sympy.Symbol('t')
-"""Mandelstam variable t"""
-u = sympy.Symbol('u')
-"""Mandelstam variable u"""
-g = sympy.Symbol('g')
-"""Strong coupling constant"""
 
-table_7_1= {
-    "quark_quarkprime_to_quark_quarkprime"       : frac("4/9")   * (s**2+u**2)/(t**2),
-    "quark_quarkprimebar_to_quark_quarkprimebar" : frac("4/9")   * (s**2+u**2)/(t**2),
-    "quark_quark_to_quark_quark"                 : frac("4/9")   * ( (s**2+u**2)/(t**2) + (s**2+t**2)/(u**2) ) - frac("8/27") * s**2/(u*t),
-    "quark_quarkbar_to_quarkprime_quarkprimebar" : frac("4/9")   * ( (t**2+u**2)/(s**2) ),
-    "quark_quarkbar_to_quark_quarkbar"           : frac("4/9")   * ( (s**2+u**2)/(t**2) + (t**2+u**2)/(s**2) ) - frac("8/27") * u**2/(s*t),
-    "quark_quarkbar_to_gluon_gluon"              : frac("32/27") * (t**2+u**2)/(t*u) - frac("8/3") * (t**2+u**2)/(s**2),
-    "gluon_gluon_to_quark_quarkbar"              : frac("1/6")   * (t**2+u**2)/(t*u) - frac("3/8") * (t**2+u**2)/(s**2),
-    "gluon_quark_to_gluon_quark"                 : frac("-4/9")  * (s**2+u**2)/(s*u) + (u**2+s**2)/t**2,
-    "gluon_gluon_to_gluon_gluon"                 : frac("9/2")   * (3 - t*u/s**2 - s*u/t**2 - s*t/u**2),
-}
-@table()
-def get_table_7_1():
-    """The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states."""
-    return table_7_1
+@equation()
+def table_7_1_qqp_qqp(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u')
+): 
+    """
+    $qq' \\to qq'$
 
-N = sympy.Symbol('N')
-"""Number of colors"""
+    The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states.
 
-table_7_2 = {
-    "quark_quarkbar_to_gammastar_gluon" :  (N**2-1)/N**2 * (t**2+u**2 + 2*s * (s+t+u))/(t*u),
-    "gluon_quark_to_gammastar_quark"     : - 1/N * (s**2 + u**2 + s*t*(s+t+u)/(s*u)),
-}
-"""Lowest order processes for virtual photon production. The colour and spin indices are averaged (summed) over initial (final) states. For a real photon (s +1 + u) = 0 and for SU(3) we have N = 3"""
+    Args:
+        s: Mandelstam variable s
+        t: Mandelstam variable t
+        u: Mandelstam variable u
+    """
+    return frac("4/9")   * (s**2+u**2)/(t**2)
 
-# Backwards compatibility
-table_7_1_qqp_qqp =  table_7_1["quark_quarkprime_to_quark_quarkprime"]
+
 @equation()
-def get_table_7_1_qqp_qqp(): 
-    "$qq' \\to qq'$"
-    return table_7_1_qqp_qqp
-table_7_1_qqpb_qqpb = table_7_1["quark_quarkprimebar_to_quark_quarkprimebar"]
+def table_7_1_qqpb_qqpb(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u')
+): 
+    """
+    $q\\bar{q}' \\to q\\bar{q}'$
+
+    The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states.
+
+
+
+    Args:
+        s: Mandelstam variable s
+        t: Mandelstam variable t
+        u: Mandelstam variable u
+    """
+    return frac("4/9")   * (s**2+u**2)/(t**2)
+
+
 @equation()
-def get_table_7_1_qqpb_qqpb(): 
-    "$q\\bar{q}' \\to q\\bar{q}'$"
-    return table_7_1_qqpb_qqpb
-table_7_1_qq_qq = table_7_1["quark_quark_to_quark_quark"]
+def table_7_1_qq_qq(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u')
+):
+    """
+    $qq \\to qq$
+
+    The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states.
+
+
+
+    Args:
+        s: Mandelstam variable s
+        t: Mandelstam variable t
+        u: Mandelstam variable u
+    """
+    return frac("4/9")   * ( (s**2+u**2)/(t**2) + (s**2+t**2)/(u**2) ) - frac("8/27") * s**2/(u*t)
+
+
 @equation()
-def get_table_7_1_qq_qq():
-    "$qq \\to qq$"
-    return table_7_1_qq_qq
-table_7_1_qqb_qpqpb = table_7_1["quark_quarkbar_to_quarkprime_quarkprimebar"]
+def table_7_1_qqb_qpqpb(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u')
+):
+    """
+    $q\\bar{q} \\to q'\\bar{q}'$
+
+    The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states.
+
+
+
+    Args:
+        s : Mandelstam variable s
+        t : Mandelstam variable t
+        u : Mandelstam variable u
+
+    """
+    return frac("4/9")   * ( (t**2+u**2)/(s**2) )
+
+
 @equation()
-def get_table_7_1_qqb_qpqpb():
-    "$q\\bar{q} \\to q'\\bar{q}'$"
-    return table_7_1_qqb_qpqpb
-table_7_1_qqb_qqb = table_7_1["quark_quarkbar_to_quark_quarkbar"]
+def table_7_1_qqb_qqb(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u')
+):
+    """
+    $q\\bar{q} \\to q\\bar{q}$
+
+    The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states.
+
+
+
+    Args:
+        s : Mandelstam variable s
+        t : Mandelstam variable t
+        u : Mandelstam variable u
+    """
+    return frac("4/9")   * ( (s**2+u**2)/(t**2) + (t**2+u**2)/(s**2) ) - frac("8/27") * u**2/(s*t)
+
+
 @equation()
-def get_table_7_1_qqb_qqb():
-    "$q\\bar{q} \\to q\\bar{q}$"
-    return table_7_1_qqb_qqb
-table_7_1_qqb_gg = table_7_1["quark_quarkbar_to_gluon_gluon"]
+def table_7_1_qqb_gg(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u')
+):
+    """
+    $q\\bar{q} \\to gg$
+
+    The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states.
+
+
+
+    Args:
+        s : Mandelstam variable s
+        t : Mandelstam variable t
+        u : Mandelstam variable u
+    """
+    return frac("32/27") * (t**2+u**2)/(t*u) - frac("8/3") * (t**2+u**2)/(s**2)
+
+
 @equation()
-def get_table_7_1_qqb_gg():
-    "$q\\bar{q} \\to gg$"
-    return table_7_1_qqb_gg
-table_7_1_gg_qqb = table_7_1["gluon_gluon_to_quark_quarkbar"]
+def table_7_1_gg_qqb(
+    s   = sympy.Symbol('s'),
+    t   = sympy.Symbol('t'),
+    u   = sympy.Symbol('u')
+):
+    """
+    $gg \\to q\\bar{q}$
+
+    The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states.
+
+
+
+    Args:
+        s : Mandelstam variable s
+        t : Mandelstam variable t
+        u : Mandelstam variable u 
+    """
+    return frac("1/6")   * (t**2+u**2)/(t*u) - frac("3/8") * (t**2+u**2)/(s**2)
+
+
 @equation()
-def get_table_7_1_gg_qqb():
-    "$gg \\to q\\bar{q}$"
-    return table_7_1_gg_qqb
-table_7_1_gq_gq = table_7_1 ["gluon_quark_to_gluon_quark"]
+def table_7_1_gq_gq(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u')
+):
+    """
+    $gq \\to gq$
+
+    The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states.
+
+
+
+    Args:
+        s : Mandelstam variable s
+        t : Mandelstam variable t
+        u : Mandelstam variable u
+    """
+    return frac("-4/9")  * (s**2+u**2)/(s*u) + (u**2+s**2)/t**2
+
 @equation()
-def get_table_7_1_gq_gq():
-    "$gq \\to gq$"
-    return table_7_1_gq_gq
-table_7_1_gg_gg = table_7_1["gluon_gluon_to_gluon_gluon"]
+def table_7_1_gg_gg(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u')
+):
+    """
+    $gg \\to gg$
+
+    The invariant matrix elements squared for two-to-two parton subprocesses with massless partons. The colour and spin indices are averaged (summed) over initial (final) states.
+
+
+
+    Args:
+        s : Mandelstam variable s
+        t : Mandelstam variable t
+        u : Mandelstam variable u
+    """
+    return frac("9/2")   * (3 - t*u/s**2 - s*u/t**2 - s*t/u**2)
+
 @equation()
-def get_table_7_1_gg_gg():
-    "$gg \\to gg$"
-    return table_7_1_gg_gg
+def table_7_2_qq_ag(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u'),
+    N = sympy.Symbol('N')
+):
+    """$q\\bar q \\to \\gamma^* g$
+
+    Lowest order processes for virtual photon production. The colour and spin indices are averaged (summed) over initial (final) states. For a real photon (s +1 + u) = 0 and for SU(3) we have N = 3
+
+    Args:
+        s : Mandelstam variable s
+        t : Mandelstam variable t
+        u : Mandelstam variable u
+        N : Number of colors
+    """
+    return (N**2-1)/N**2 * (t**2+u**2 + 2*s * (s+t+u))/(t*u)
+
+@equation()
+def table_7_2_gq_aq(
+    s = sympy.Symbol('s'),
+    t = sympy.Symbol('t'),
+    u = sympy.Symbol('u'),
+    N = sympy.Symbol('N')
+):
+    """$gq \\to \\gamma^* q$
+
+    Lowest order processes for virtual photon production. The colour and spin indices are averaged (summed) over initial (final) states. For a real photon (s +1 + u) = 0 and for SU(3) we have N = 3
+
+    Args:
+        s : Mandelstam variable s
+        t : Mandelstam variable t
+        u : Mandelstam variable u
+        N : Number of colors
+    """
+    return - 1/N * (s**2 + u**2 + s*t*(s+t+u)/(s*u))
+
 
 bibtex : str = """
 @book{Ellis:1996mzs,

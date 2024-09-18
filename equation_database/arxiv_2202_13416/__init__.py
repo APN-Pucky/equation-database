@@ -2,57 +2,109 @@ import sympy
 
 from equation_database.util.doc import bib, equation
 
-s = sympy.Symbol('s')
-"""
-Mandelstam variable s
-
-Reference:
-    - :py:obj:`equation_database.doi_10_1103_physrev_176_1700.s`
-
-"""
-t = sympy.Symbol('t')
-"""Mandelstam variable t (See :py:obj:`equation_database.doi_10_1103_physrev_176_1700.t`)"""
-u = sympy.Symbol('u')
-"""Mandelstam variable u"""
-B = sympy.Symbol('B') 
-"""squared eletroweakino-squark coupling """
-g_s = sympy.Symbol('g_s')
-"""strong coupling constant """
-C_A = sympy.Symbol('C_A')
-"""Casimir operator for the adjoint representation of SU(3) """
-C_F = sympy.Symbol('C_F')
-"""Casimir operator for the fundamental representation of SU(3) """
-m_X = sympy.Symbol('m_chi')
-"""Mass of the electroweakino """
-m_sq = sympy.Symbol('m_q')
-"""Mass of the squark """
-M_s = sympy.Symbol('M_s')
-"""Matrix element for the s channel """
-M_u = sympy.Symbol('M_u')
-"""Matrix element for the u channel """
-M = sympy.Symbol('M')
-"""Matrix element for the process """
 
 
-equation_2_4 = sympy.Eq(sympy.Abs(M_s)**2 , g_s**2 * C_A*C_F * B / s *2 * (m_X**2 -t))
+
 @equation()
-def get_equation_2_4(): 
-    """a"""
-    return equation_2_4
+def equation_2_4(
+    M_s = sympy.Symbol('M_s'),
+    g_s = sympy.Symbol('g_s'),
+    C_A = sympy.Symbol('C_A'),
+    C_F = sympy.Symbol('C_F'),
+    B = sympy.Symbol('B'),
+    s = sympy.Symbol('s'),
+    m_X = sympy.Symbol('m_X'),
+    t = sympy.Symbol('t')
+): 
+    """
 
-equation_2_5 = sympy.Eq(sympy.Abs(M_u)**2 , g_s**2 * C_A *C_F *B/(u - m_sq**2)**2 * 2 * ( m_X**2- u) * ( m_sq**2+u))
+    Args:
+        M_s: Matrix element for the s channel
+        g_s: strong coupling constant
+        C_A: Casimir operator for the adjoint representation of SU(3)
+        C_F: Casimir operator for the fundamental representation of SU(3)
+        B: squared eletroweakino-squark coupling
+        s: Mandelstam variable s
+        m_X: Mass of the electroweakino
+        t: Mandelstam variable t
+    """
+    return sympy.Eq(sympy.Abs(M_s)**2 , g_s**2 * C_A*C_F * B / s *2 * (m_X**2 -t))
+
 @equation()
-def get_equation_2_5(): return equation_2_5
+def equation_2_5(
+    M_u = sympy.Symbol('M_u'),
+    g_s = sympy.Symbol('g_s'),
+    C_A = sympy.Symbol('C_A'),
+    C_F = sympy.Symbol('C_F'),
+    B = sympy.Symbol('B'),
+    u = sympy.Symbol('u'),
+    m_X = sympy.Symbol('m_X'),
+    m_sq = sympy.Symbol('m_sq')
+): 
+    """
 
-equation_2_6 = sympy.Eq(2*sympy.re(M_s*sympy.conjugate(M_u)), g_s**2 * C_A *C_F * B /(s*(u-m_sq**2)) * ( 2 * (m_X**4- m_sq**4) + m_sq**2 * ( 2*u -3*s) -2*m_X **2 * ( 2*m_sq**2 +u) -s*u) )
+
+    Args:
+        M_u: Matrix element for the u channel
+        g_s: strong coupling constant
+        C_A: Casimir operator for the adjoint representation of SU(3)
+        C_F: Casimir operator for the fundamental representation of SU(3)
+        B: squared eletroweakino-squark coupling
+        u: Mandelstam variable u
+        m_X: Mass of the electroweakino
+        m_sq: Mass of the squark
+    """
+    return sympy.Eq(sympy.Abs(M_u)**2 , g_s**2 * C_A *C_F *B/(u - m_sq**2)**2 * 2 * ( m_X**2- u) * ( m_sq**2+u))
+
 @equation()
-def get_equation_2_6(): return equation_2_6
+def equation_2_6(
+    M_s = sympy.Symbol('M_s'),
+    M_u = sympy.Symbol('M_u'),
+    g_s = sympy.Symbol('g_s'),
+    C_A = sympy.Symbol('C_A'),
+    C_F = sympy.Symbol('C_F'),
+    B = sympy.Symbol('B'),
+    s = sympy.Symbol('s'),
+    u = sympy.Symbol('u'),
+    m_X = sympy.Symbol('m_X'),
+    m_sq = sympy.Symbol('m_sq')
+): 
+    """
 
-equation_2_8 = sympy.Eq(sympy.Abs(M)**2, (equation_2_4.lhs + equation_2_5.lhs + equation_2_6.lhs )/96)
+    Args:
+        M_s: Matrix element for the s channel
+        M_u: Matrix element for the u channel
+        g_s: strong coupling constant
+        C_A: Casimir operator for the adjoint representation of SU(3)
+        C_F: Casimir operator for the fundamental representation of SU(3)
+        B: squared eletroweakino-squark coupling
+        s: Mandelstam variable s
+        u: Mandelstam variable u
+        m_X: Mass of the electroweakino
+        m_sq: Mass of the squark
+    """
+    return sympy.Eq(2*sympy.re(M_s*sympy.conjugate(M_u)), g_s**2 * C_A *C_F * B /(s*(u-m_sq**2)) * ( 2 * (m_X**4- m_sq**4) + m_sq**2 * ( 2*u -3*s) -2*m_X **2 * ( 2*m_sq**2 +u) -s*u) )
+
 @equation()
-def get_equation_2_8(): return equation_2_8
+def equation_2_8(
+    M = sympy.Symbol('M'),
+    M_s = sympy.Symbol('M_s'),
+    M_u = sympy.Symbol('M_u'),
+): 
+    """
+    total spin- and colour-averaged squared amplitude 
 
-bibtex : str = """
+    Args:
+        M: Matrix element for the process
+        M_s: Matrix element for the s channel
+        M_u: Matrix element for the u channel
+    """
+    return sympy.Eq(sympy.Abs(M)**2, (sympy.Abs(M_s)**2 + sympy.Abs(M_u)**2 + 2*sympy.re(M_s*sympy.conjugate(M_u)))/96)
+
+
+@bib()
+def bibtex(): 
+    bibtex : str = """
 @article{Fiaschi:2022odp,
     author = "Fiaschi, Juri and Fuks, Benjamin and Klasen, Michael and Neuwirth, Alexander",
     title = "{Soft gluon resummation for associated squark-electroweakino production at the LHC}",
@@ -67,6 +119,5 @@ bibtex : str = """
     year = "2022"
 }
 """
-@bib()
-def get_bibtex(): 
     return bibtex
+
