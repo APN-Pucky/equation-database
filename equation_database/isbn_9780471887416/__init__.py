@@ -64,7 +64,7 @@ def equation_11_35(
 
 
 @bib()
-def get_bibtex():
+def bibtex():
     bibtex: str = """
 @book{Halzen:1984mc,
     author = "Halzen, F. and Martin, Alan D.",
