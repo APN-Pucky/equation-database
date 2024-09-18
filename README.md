@@ -11,5 +11,7 @@ This project is a database of equations that can be used in various fields of sc
 
 ## FAQ
 
+- Why?
+    - Coming from HEP experimental papers often come with data on hepdata. Similarly to the data, the equations should be stored in a database.
 - Why sympy?
     - Since sympy has the best conversion to LaTeX, MathML and other programming languages.
