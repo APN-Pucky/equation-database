@@ -6,7 +6,7 @@ html:
 
 pdf:
 	hatch run full:$(MAKE) -C docs latexpdf
-	
+
 doc: html
 
 install:
@@ -20,7 +20,7 @@ test:
 	rm -f .coverage coverage.xml
 	poetry run pytest
 
-commit: 
+commit:
 	-git add .
 	-git commit
 
@@ -30,7 +30,7 @@ push: commit
 pull: commit
 	git pull
 
-clean: 
+clean:
 	rm -r docs/build docs/source/_autosummary
 	rm -r .eggs .pytest_cache *.egg-info dist build
 

@@ -10,9 +10,26 @@ import sys
 
 import toml
 
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the directory is relative to the
+# documentation root, use os.path.abspath to make it absolute, like shown here.
+# https://github.com/sympy/sphinx-math-dollar/issues/18
+from docutils.nodes import (
+    doctest_block,
+    image,
+    literal,
+    literal_block,
+    math,
+    math_block,
+    pending,
+    raw,
+    rubric,
+    substitution_definition,
+    target,
+)
+
 sys.path.insert(0, os.path.abspath("../.."))
 
-import equation_database
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -31,8 +48,8 @@ rst_epilog = f""".. |project| replace:: {project} \n\n"""
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.napoleon',
-    #"myst_parser",
+    "sphinx.ext.napoleon",
+    # "myst_parser",
     "sphinx.ext.autodoc",
     "sphinx.ext.githubpages",
     "sphinx.ext.viewcode",
@@ -40,7 +57,7 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",
     "sphinx.ext.doctest",
-    #"matplotlib.sphinxext.plot_directive",
+    # "matplotlib.sphinxext.plot_directive",
     #'numpydoc',
     "sphinx.ext.autosummary",
     "sphinx.ext.coverage",
@@ -60,33 +77,14 @@ autoapi_dirs = ["../../equation_database"]
 autoapi_python_class_content = "both"
 
 autodoc_default_options = {
-    'private-members': False,
-    'inherited-members': True,
-    'special-members': False,
+    "private-members": False,
+    "inherited-members": True,
+    "special-members": False,
 }
 
 
-
-templates_path = ['_templates']
+templates_path = ["_templates"]
 exclude_patterns = []
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-# https://github.com/sympy/sphinx-math-dollar/issues/18
-from docutils.nodes import (
-    doctest_block,
-    image,
-    literal,
-    literal_block,
-    math,
-    math_block,
-    pending,
-    raw,
-    rubric,
-    substitution_definition,
-    target,
-)
 
 
 math_dollar_node_blacklist = (
@@ -105,10 +103,9 @@ math_dollar_node_blacklist = (
 # print(NODE_BLACKLIST)
 
 
-
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-#html_theme = 'alabaster'
+# html_theme = 'alabaster'
 html_theme = "sphinx_rtd_theme"
-html_static_path = ['_static']
+html_static_path = ["_static"]

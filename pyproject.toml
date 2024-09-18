@@ -11,7 +11,7 @@ maintainers = [{ name = "Alexander Puck Neuwirth", email = "alexander@neuwirth-i
 # TODO classifiers and keywords
 
 requires = { python = ">=3.8" }
-dependencies = [ 
+dependencies = [
     "sympy"
     ]
 dynamic = ["version"]

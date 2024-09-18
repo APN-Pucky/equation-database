@@ -1,4 +1,4 @@
-:mod:`{{fullname}}` 
+:mod:`{{fullname}}`
 ======================
 
 .. currentmodule:: {{fullname}}
@@ -6,12 +6,10 @@
 
 .. automodule:: {{fullname}}
    :members:
-   
-   .. autosummary:: 
+
+   .. autosummary::
    {% for element in functions %}
       {{element}}
    {% endfor %}
-   
-   .. rubric:: Functions
 
-   
+   .. rubric:: Functions
