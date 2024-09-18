@@ -49,7 +49,7 @@ rst_epilog = f""".. |project| replace:: {project} \n\n"""
 
 extensions = [
     "sphinx.ext.napoleon",
-    # "myst_parser",
+    "myst_parser",
     "sphinx.ext.autodoc",
     "sphinx.ext.githubpages",
     "sphinx.ext.viewcode",
