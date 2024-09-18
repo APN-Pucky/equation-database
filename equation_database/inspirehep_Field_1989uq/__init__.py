@@ -81,7 +81,7 @@ def equation_4_3_20(
 @bib()
 def bibtex():
     # https://www.desy.de/~jung/qcd_and_mc_2009-2010/R.Field-Applications-of-pQCD.pdf
-    bibtex: str = """
+    return """
   @book{Field:1989uq,
       author = "Field, R. D.",
       title = "{Applications of Perturbative QCD}",
@@ -89,4 +89,3 @@ def bibtex():
       year = "1989"
   }
   """
-    return bibtex
