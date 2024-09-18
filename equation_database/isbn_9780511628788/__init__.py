@@ -199,7 +199,7 @@ def table_7_2_qq_ag(
 ):
     """$q\\bar q \\to \\gamma^* g$
 
-    Lowest order processes for virtual photon production. The colour and spin indices are averaged (summed) over initial (final) states. For a real photon (s +1 + u) = 0 and for SU(3) we have N = 3
+    Lowest order processes for virtual photon production. The colour and spin indices are averaged (summed) over initial (final) states. For a real photon (s + t + u) = 0 and for SU(3) we have N = 3
 
     Args:
         s : Mandelstam variable s
@@ -218,7 +218,7 @@ def table_7_2_gq_aq(
 ):
     """$gq \\to \\gamma^* q$
 
-    Lowest order processes for virtual photon production. The colour and spin indices are averaged (summed) over initial (final) states. For a real photon (s +1 + u) = 0 and for SU(3) we have N = 3
+    Lowest order processes for virtual photon production. The colour and spin indices are averaged (summed) over initial (final) states. For a real photon (s + t + u) = 0 and for SU(3) we have N = 3
 
     Args:
         s : Mandelstam variable s
