@@ -38,34 +38,34 @@ def equation():
                 # tex += indent_string_twice(f">>> print(sympy.mathml({target.__name__}()))") + "\n" + indent_string_twice(sympy.mathml(r))
         else:
             tex = tex + "\n\n    Returns:\n        $" + sympy.latex(r) + "$"
-            tex = tex + "\n\n.. tabs::\n\n"
-            tex += (
+            tex = tex + "\n\n    .. tabs::\n\n"
+            tex += indent_string(
                 "    .. tab :: LaTeX\n\n"
                 + "        ::\n\n    "
                 + indent_string_twice(sympy.latex(r))
             )
-            tex += (
+            tex += indent_string(
                 "\n\n    .. tab :: MathML\n\n"
                 + "        ::\n\n    "
                 + indent_string_twice(sympy.mathml(r))
             )
-            tex += (
+            tex += indent_string(
                 "\n\n    .. tab :: Sympy\n\n"
                 + "        ::\n\n    "
                 + indent_string_twice(sympy.mathematica_code(r))
             )
-            tex += (
+            tex += indent_string(
                 "\n\n    .. tab :: Octave\n\n"
                 + "        ::\n\n    "
                 + indent_string_twice(sympy.octave_code(r))
             )
-            tex += (
+            tex += indent_string(
                 "\n\n    .. tab :: Mathematica\n\n"
                 + "        ::\n\n    "
                 + indent_string_twice(sympy.mathematica_code(r))
             )
             try:
-                tex += (
+                tex += indent_string(
                     "\n\n    .. tab :: Python\n\n"
                     + "        ::\n\n    "
                     + indent_string_twice(sympy.pycode(r))
@@ -74,7 +74,7 @@ def equation():
                 # fails for some expressions
                 pass
             try:
-                tex += (
+                tex += indent_string(
                     "\n\n    .. tab :: C\n\n"
                     + "        ::\n\n    "
                     + indent_string_twice(sympy.ccode(r))
@@ -83,7 +83,7 @@ def equation():
                 # fails for some expressions
                 pass
             try:
-                tex += (
+                tex += indent_string(
                     "\n\n    .. tab :: Fortran\n\n"
                     + "        ::\n\n    "
                     + indent_string_twice(sympy.fcode(r))
@@ -92,7 +92,7 @@ def equation():
                 # fails for some expressions
                 pass
             try:
-                tex += (
+                tex += indent_string(
                     "\n\n    .. tab :: Rust\n\n"
                     + "        ::\n\n    "
                     + indent_string_twice(sympy.rust_code(r))
@@ -107,7 +107,11 @@ def equation():
 
 
 def indent_string_twice(string):
-    indented_string = "\n".join("        " + line for line in string.splitlines())
+    return indent_string(string, 2)
+
+
+def indent_string(string, n=1):
+    indented_string = "\n".join("        " * n + line for line in string.splitlines())
     return indented_string
 
 
