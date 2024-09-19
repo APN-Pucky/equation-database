@@ -105,6 +105,10 @@ math_dollar_node_blacklist = (
 # print(NODE_BLACKLIST)
 
 
+def setup(app):
+    app.add_js_file("sync-tabs.js")
+
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
