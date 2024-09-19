@@ -36,7 +36,9 @@ docs = [
     "sphinx-autoapi",
     "sphinx_math_dollar",
     "myst-parser",
-    "toml"
+    "toml",
+    "sphinx-tabs",
+    "sphinx-copybutton",
 ]
 
 dev = [

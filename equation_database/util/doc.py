@@ -38,19 +38,68 @@ def equation():
                 # tex += indent_string_twice(f">>> print(sympy.mathml({target.__name__}()))") + "\n" + indent_string_twice(sympy.mathml(r))
         else:
             tex = tex + "\n\n    Returns:\n        $" + sympy.latex(r) + "$"
-            tex = tex + "\n\n    Example:"
+            tex = tex + "\n\n.. tabs::\n\n"
             tex += (
-                "\n"
-                + indent_string_twice(f">>> print(sympy.latex({target.__name__}()))")
-                + "\n"
+                "    .. tab :: Latex\n\n"
+                + "        ::\n\n    "
                 + indent_string_twice(sympy.latex(r))
             )
             tex += (
-                "\n"
-                + indent_string_twice(f">>> print(sympy.mathml({target.__name__}()))")
-                + "\n"
+                "\n\n    .. tab :: MathML\n\n"
+                + "        ::\n\n    "
                 + indent_string_twice(sympy.mathml(r))
             )
+            tex += (
+                "\n\n    .. tab :: Sympy\n\n"
+                + "        ::\n\n    "
+                + indent_string_twice(sympy.mathematica_code(r))
+            )
+            tex += (
+                "\n\n    .. tab :: Octave\n\n"
+                + "        ::\n\n    "
+                + indent_string_twice(sympy.octave_code(r))
+            )
+            tex += (
+                "\n\n    .. tab :: Mathematica\n\n"
+                + "        ::\n\n    "
+                + indent_string_twice(sympy.mathematica_code(r))
+            )
+            try:
+                tex += (
+                    "\n\n    .. tab :: Python\n\n"
+                    + "        ::\n\n    "
+                    + indent_string_twice(sympy.pycode(r))
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += (
+                    "\n\n    .. tab :: C\n\n"
+                    + "        ::\n\n    "
+                    + indent_string_twice(sympy.ccode(r))
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += (
+                    "\n\n    .. tab :: Fortran\n\n"
+                    + "        ::\n\n    "
+                    + indent_string_twice(sympy.fcode(r))
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += (
+                    "\n\n    .. tab :: Rust\n\n"
+                    + "        ::\n\n    "
+                    + indent_string_twice(sympy.rust_code(r))
+                )
+            except Exception:
+                # fails for some expressions
+                pass
         target.__doc__ = target.__doc__ + tex
         return target
 

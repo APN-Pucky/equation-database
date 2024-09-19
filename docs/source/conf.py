@@ -65,6 +65,8 @@ extensions = [
     "jupyter_sphinx",
     #'jupyter_sphinx.execute'
     # "autoapi.extension",
+    "sphinx_tabs.tabs",
+    "sphinx_copybutton",
 ]
 napoleon_google_docstring = True
 
