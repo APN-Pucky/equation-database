@@ -40,7 +40,7 @@ def equation():
             tex = tex + "\n\n    Returns:\n        $" + sympy.latex(r) + "$"
             tex = tex + "\n\n.. tabs::\n\n"
             tex += (
-                "    .. tab :: Latex\n\n"
+                "    .. tab :: LaTeX\n\n"
                 + "        ::\n\n    "
                 + indent_string_twice(sympy.latex(r))
             )
