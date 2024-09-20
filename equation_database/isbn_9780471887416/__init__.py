@@ -36,6 +36,21 @@ def equation_6_31(
 
 
 @equation()
+def equation_6_32(
+    alpha=sympy.Symbol("alpha"), s=sympy.Symbol("s"), theta=sympy.Symbol("theta")
+):
+    """
+    Differential cross section for $e^+e^- \\to \\mu^+\\mu^-$
+
+    Args:
+        alpha: fine structure constant
+        s: Mandelstam variable s
+        theta: scattering angle of the muons
+    """
+    return alpha / (4 * s) * (1 + sympy.cos(theta) ** 2)
+
+
+@equation()
 def equation_6_113(e=sympy.Symbol("e"), s=sympy.Symbol("s"), u=sympy.Symbol("u")):
     """
     spin averaged Compton amplitude
