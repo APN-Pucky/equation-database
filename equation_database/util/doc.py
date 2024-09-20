@@ -126,11 +126,11 @@ def bib():
 
             for entry in bibtexparser.loads(r).entries:
                 if entry.get("doi"):
-                    ret += f"`DOI <https://doi.org/{entry['doi']}>`_ "
+                    ret += f"`DOI <https://doi.org/{entry['doi']}>`_, "
                 if entry.get("eprint"):
-                    ret += f"`arXiv <https://arxiv.org/abs/{entry['eprint']}>`_ "
+                    ret += f"`arXiv <https://arxiv.org/abs/{entry['eprint']}>`_, "
                 if entry.get("url"):
-                    ret += f"`URL <{entry['url']}>`_ "
+                    ret += f"`URL <{entry['url']}>`_, "
                 if entry.get("title"):
                     t = f"{entry['title']}"
                     if t[0] == "{" and t[-1] == "}":
