@@ -55,7 +55,7 @@ def equation_6_32(
     """
     return sympy.Eq(
         sympy.Derivative(sigma, Omega),
-        alpha ^ 2 / (4 * s) * (1 + sympy.cos(theta) ** 2),
+        alpha**2 / (4 * s) * (1 + sympy.cos(theta) ** 2),
     )
 
 
@@ -73,7 +73,7 @@ def equation_6_33(
         alpha: fine structure constant
         s: Mandelstam variable s
     """
-    return sympy.Eq(sigma, alpha ^ 2 / (3 * s) * 4 * sympy.pi)
+    return sympy.Eq(sigma, alpha**2 / (3 * s) * 4 * sympy.pi)
 
 
 @equation()
