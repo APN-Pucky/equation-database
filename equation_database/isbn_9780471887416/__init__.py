@@ -60,6 +60,23 @@ def equation_6_32(
 
 
 @equation()
+def equation_6_33(
+    sigma=sympy.Symbol("sigma"),
+    alpha=sympy.Symbol("alpha"),
+    s=sympy.Symbol("s"),
+):
+    """
+    Cross section for $e^+e^- \\to \\mu^+\\mu^-$
+
+    Args:
+        sigma: cross section
+        alpha: fine structure constant
+        s: Mandelstam variable s
+    """
+    return sympy.Eq(sigma, alpha ^ 2 / (3 * s) * 4 * sympy.pi)
+
+
+@equation()
 def equation_6_113(e=sympy.Symbol("e"), s=sympy.Symbol("s"), u=sympy.Symbol("u")):
     """
     spin averaged Compton amplitude
