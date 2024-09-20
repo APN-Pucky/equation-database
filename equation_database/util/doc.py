@@ -41,24 +41,28 @@ def equation():
             tex = tex + "\n\n    .. tabs::\n\n"
             tex += indent_string(
                 "    .. tab :: LaTeX\n\n"
-                + "        ::\n\n    "
-                + indent_string_twice(sympy.latex(r))
+                + "        ::\n\n"
+                + indent_string(sympy.latex(r), 3)
             )
             tex += indent_string(
                 "\n\n    .. tab :: MathML\n\n"
-                + "        ::\n\n    "
-                + indent_string_twice(sympy.mathml(r))
-            )
-            tex += indent_string(
-                "\n\n    .. tab :: Sympy\n\n"
-                + "        ::\n\n    "
-                + indent_string_twice(sympy.mathematica_code(r))
+                + "        ::\n\n"
+                + indent_string(sympy.mathml(r), 3)
             )
             try:
                 tex += indent_string(
+                    "\n\n    .. tab :: Sympy\n\n"
+                    + "        ::\n\n"
+                    + indent_string(sympy.str(r), 3)
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
                     "\n\n    .. tab :: Octave\n\n"
-                    + "        ::\n\n    "
-                    + indent_string_twice(sympy.octave_code(r))
+                    + "        ::\n\n"
+                    + indent_string(sympy.octave_code(r), 3)
                 )
             except Exception:
                 # fails for some expressions
@@ -66,8 +70,8 @@ def equation():
             try:
                 tex += indent_string(
                     "\n\n    .. tab :: Mathematica\n\n"
-                    + "        ::\n\n    "
-                    + indent_string_twice(sympy.mathematica_code(r))
+                    + "        ::\n\n"
+                    + indent_string(sympy.mathematica_code(r), 3)
                 )
             except Exception:
                 # fails for some expressions
@@ -75,8 +79,8 @@ def equation():
             try:
                 tex += indent_string(
                     "\n\n    .. tab :: Python\n\n"
-                    + "        ::\n\n    "
-                    + indent_string_twice(sympy.pycode(r))
+                    + "        ::\n\n"
+                    + indent_string(sympy.pycode(r), 3)
                 )
             except Exception:
                 # fails for some expressions
@@ -84,8 +88,17 @@ def equation():
             try:
                 tex += indent_string(
                     "\n\n    .. tab :: C\n\n"
-                    + "        ::\n\n    "
-                    + indent_string_twice(sympy.ccode(r))
+                    + "        ::\n\n"
+                    + indent_string(sympy.ccode(r), 3)
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: C++\n\n"
+                    + "        ::\n\n"
+                    + indent_string(sympy.cxxcode(r), 3)
                 )
             except Exception:
                 # fails for some expressions
@@ -93,8 +106,8 @@ def equation():
             try:
                 tex += indent_string(
                     "\n\n    .. tab :: Fortran\n\n"
-                    + "        ::\n\n    "
-                    + indent_string_twice(sympy.fcode(r))
+                    + "        ::\n\n"
+                    + indent_string(sympy.fcode(r), 3)
                 )
             except Exception:
                 # fails for some expressions
@@ -102,8 +115,26 @@ def equation():
             try:
                 tex += indent_string(
                     "\n\n    .. tab :: Rust\n\n"
-                    + "        ::\n\n    "
-                    + indent_string_twice(sympy.rust_code(r))
+                    + "        ::\n\n"
+                    + indent_string(sympy.rust_code(r), 3)
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: ASCII\n\n"
+                    + "        ::\n\n"
+                    + indent_string(sympy.pretty(r, use_unicode=False), 3)
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Unicode\n\n"
+                    + "        ::\n\n"
+                    + indent_string(sympy.pretty(r, use_unicode=True), 3)
                 )
             except Exception:
                 # fails for some expressions
