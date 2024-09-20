@@ -1,5 +1,6 @@
 # equation-database
 
+[![Documentation Status](https://readthedocs.org/projects/equation-database/badge/?version=latest)](https://equation-database.readthedocs.io/en/latest/?badge=latest)
 
 ## Description
 
