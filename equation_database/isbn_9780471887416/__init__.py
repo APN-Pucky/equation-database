@@ -37,17 +37,26 @@ def equation_6_31(
 
 @equation()
 def equation_6_32(
-    alpha=sympy.Symbol("alpha"), s=sympy.Symbol("s"), theta=sympy.Symbol("theta")
+    sigma=sympy.Symbol("sigma"),
+    Omega=sympy.Symbol("Omega"),
+    alpha=sympy.Symbol("alpha"),
+    s=sympy.Symbol("s"),
+    theta=sympy.Symbol("theta"),
 ):
     """
-    Differential cross section for $e^+e^- \\to \\mu^+\\mu^-$
+    Differential cross section for $e^+e^- \\to \\mu^+\\mu^-$ in the center of mass frame
 
     Args:
+        sigma: cross section
+        Omega: solid angle
         alpha: fine structure constant
         s: Mandelstam variable s
         theta: scattering angle of the muons
     """
-    return alpha / (4 * s) * (1 + sympy.cos(theta) ** 2)
+    return sympy.Eq(
+        sympy.Derivative(sigma, Omega),
+        alpha ^ 2 / (4 * s) * (1 + sympy.cos(theta) ** 2),
+    )
 
 
 @equation()

@@ -54,16 +54,24 @@ def equation():
                 + "        ::\n\n    "
                 + indent_string_twice(sympy.mathematica_code(r))
             )
-            tex += indent_string(
-                "\n\n    .. tab :: Octave\n\n"
-                + "        ::\n\n    "
-                + indent_string_twice(sympy.octave_code(r))
-            )
-            tex += indent_string(
-                "\n\n    .. tab :: Mathematica\n\n"
-                + "        ::\n\n    "
-                + indent_string_twice(sympy.mathematica_code(r))
-            )
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Octave\n\n"
+                    + "        ::\n\n    "
+                    + indent_string_twice(sympy.octave_code(r))
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Mathematica\n\n"
+                    + "        ::\n\n    "
+                    + indent_string_twice(sympy.mathematica_code(r))
+                )
+            except Exception:
+                # fails for some expressions
+                pass
             try:
                 tex += indent_string(
                     "\n\n    .. tab :: Python\n\n"
