@@ -53,7 +53,7 @@ def equation():
                 tex += indent_string(
                     "\n\n    .. tab :: Sympy\n\n"
                     + "        ::\n\n"
-                    + indent_string(sympy.str(r), 3)
+                    + indent_string(sympy.sstr(r), 3)
                 )
             except Exception:
                 # fails for some expressions
