@@ -1,4 +1,5 @@
 import sympy
+import bibtexparser
 
 
 def equation():
@@ -160,23 +161,18 @@ def bib():
             target.__doc__ = ""
         r = target()
         ret = target.__doc__
-        try:
-            import bibtexparser
-
-            for entry in bibtexparser.loads(r).entries:
-                if entry.get("doi"):
-                    ret += f"`DOI <https://doi.org/{entry['doi']}>`_, "
-                if entry.get("eprint"):
-                    ret += f"`arXiv <https://arxiv.org/abs/{entry['eprint']}>`_, "
-                if entry.get("url"):
-                    ret += f"`URL <{entry['url']}>`_, "
-                if entry.get("title"):
-                    t = f"{entry['title']}"
-                    if t[0] == "{" and t[-1] == "}":
-                        t = t[1:-1]
-                    ret += t + " "
-        except ImportError:
-            pass
+        for entry in bibtexparser.loads(r).entries:
+            if entry.get("doi"):
+                ret += f"`DOI <https://doi.org/{entry['doi']}>`_, "
+            if entry.get("eprint"):
+                ret += f"`arXiv <https://arxiv.org/abs/{entry['eprint']}>`_, "
+            if entry.get("url"):
+                ret += f"`URL <{entry['url']}>`_, "
+            if entry.get("title"):
+                t = f"{entry['title']}"
+                if t[0] == "{" and t[-1] == "}":
+                    t = t[1:-1]
+                ret += t + " "
         ret += "\n:: \n" + indent_string_twice(r)
         target.__doc__ = ret
         return target

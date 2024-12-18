@@ -12,7 +12,8 @@ maintainers = [{ name = "Alexander Puck Neuwirth", email = "alexander@neuwirth-i
 
 requires = { python = ">=3.8" }
 dependencies = [
-    "sympy"
+    "sympy",
+    "bibtexparser<2",
     ]
 dynamic = ["version"]
 
@@ -25,7 +26,6 @@ test = [
 ]
 
 docs = [
-    "bibtexparser",
     "sphinx",
     "sphinx-rtd-theme",
     #"sphinx-napoleon",
