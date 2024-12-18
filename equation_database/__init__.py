@@ -36,7 +36,7 @@ def find(title=None, doi=None, isbn=None, eprint=None, key=None):
                 if entry.get("isbn"):
                     if entry["isbn"] == isbn:
                         return submodule
-                if entry.key == key:
+                if entry.key() == key:
                     return submodule
 
     return None
