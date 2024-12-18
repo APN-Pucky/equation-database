@@ -19,15 +19,17 @@ def equation_3_4(
     """
 
     Args:
-        s       : Mandelstamm variable s
-        q       : charge of a particle
-        i       : index of the i final state particle
-        beta    : magnitude of the particles three momentum divided by the energy/0-component of the four vector.
-        mu_F    : factorization scale
-        xi_C    : arbitrary parameter (e.g. set to one)
-        f_plus  : index of the plus incoming particle
-        f_minus : index of the minus incoming particle
-        n_final : number of final state particles
+        mathcal_Q_EW : one of the singular contributions to the EW virtual part
+        s            : Mandelstamm variable s
+        q            : charge of a particle
+        Q_EW         : energy scale of the process
+        beta         : magnitude of the particles three momentum divided by the energy/0-component of the four vector.
+        xi_C         : arbitrary parameter (e.g. set to one)
+        mu_F         : factorization scale
+        i            : index of the i final state particle
+        f_plus       : index of the plus incoming particle
+        f_minus      : index of the minus incoming particle
+        n_final      : number of final state particles
     """
     return sy.Eq(
         mathcal_Q_EW,
