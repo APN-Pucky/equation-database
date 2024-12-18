@@ -2,23 +2,6 @@ import sympy as sp
 
 from equation_database.util.doc import bib, equation
 
-# M = sp.Symbol("M")
-# """mass of the virtual photon"""
-## M2 = sp.Symbol('M^2')
-# M2 = M**2  # sp.Symbol('M2')
-#
-# N_gamma = sp.Symbol("N_gamma")
-# """yield of virtual photons"""
-#
-## N_ee = sp.Function('N_ee')(M2, N_gamma)
-# N_ee = sp.Symbol("N_ee")
-# """electron pair yield"""
-#
-# alpha = sp.Symbol("alpha")
-# """fine structure constant"""
-#
-# L = sp.Function("L")(M)
-
 
 @equation()
 def equation_B1(
@@ -39,8 +22,9 @@ def equation_B1(
         alpha: fine structure constant
     """
     return sp.Eq(
-        sp.Derivative(N_ee, M, 2), (alpha) / (3 * sp.pi) * (L(M) / M**2)
-    ) * sp.Integral(N_gamma)
+        sp.Derivative(N_ee, M, 2),
+        (alpha) / (3 * sp.pi) * (L(M) / M**2) * sp.Integral(N_gamma),
+    )
 
 
 @bib()
