@@ -1,4 +1,5 @@
-from sympy import Rational, Symbol, Function, log, Eq, Abs, sqrt
+import sympy
+from sympy import Rational, Symbol, Function, log, Eq, sqrt
 from equation_database.util.doc import bib, equation
 from equation_database.util.math import Li2
 
@@ -20,7 +21,7 @@ def equation_A_21(
         p : massless four momentum
         m : massive four momentum
     """
-    return Eq(phat, p / p_0), Eq(mhat, m / m_0), Eq(beta, Abs(mvec) / m_0)
+    return Eq(phat, p / p_0), Eq(mhat, m / m_0), Eq(beta, sympy.Abs(mvec) / m_0)
 
 
 @equation()
