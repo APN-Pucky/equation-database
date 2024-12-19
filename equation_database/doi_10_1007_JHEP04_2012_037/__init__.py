@@ -126,6 +126,10 @@ def equation_3_6(
         l            : index of the l massless particle
         n_massless   : number of (charged implied by equation) massless particles
         n_massive    : number of (charged implied by equation) massive particles
+
+    .. warning::
+        There is a typo in this equation. The sign infront of the I_\epsilon term should also be negative as in :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_28`.
+
     """
     return Eq(
         mathcal_J,
