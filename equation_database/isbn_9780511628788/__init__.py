@@ -197,7 +197,7 @@ def table_7_2_gq_aq(
 
 @bib()
 def bibtex():
-    bibtex: str = """
+    bibtex: str = r"""
 @book{Ellis:1996mzs,
     author = "Ellis, R. Keith and Stirling, W. James and Webber, B. R.",
     title = "{QCD and collider physics}",

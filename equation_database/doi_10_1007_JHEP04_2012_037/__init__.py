@@ -198,7 +198,7 @@ def equation_3_7(
 
 @bib()
 def bibtex():
-    bibtex: str = """
+    bibtex: str = r"""
 @article{Barze:2012tt,
     author = "Barze, Luca and Montagna, Guido and Nason, Paolo and Nicrosini, Oreste and Piccinini, Fulvio",
     title = "{Implementation of electroweak corrections in the POWHEG BOX: single W production}",

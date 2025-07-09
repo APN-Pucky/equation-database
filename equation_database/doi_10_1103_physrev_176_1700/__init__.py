@@ -78,7 +78,7 @@ def equation_A4(
 
 @bib()
 def bibtex():
-    bibtex: str = """
+    bibtex: str = r"""
 @article{Balachandran:1968rj,
     author = "Balachandran, A. P. and Nuyts, J. and Meggs, W. J. and Ramond, Pierre",
     title = "{Simultaneous partial wave expansion in the Mandelstam variables: the group SU(3)}",

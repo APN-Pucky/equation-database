@@ -129,7 +129,7 @@ def equation_2_8(
 
 @bib()
 def bibtex():
-    bibtex: str = """
+    bibtex: str = r"""
 @article{Fiaschi:2022odp,
     author = "Fiaschi, Juri and Fuks, Benjamin and Klasen, Michael and Neuwirth, Alexander",
     title = "{Soft gluon resummation for associated squark-electroweakino production at the LHC}",

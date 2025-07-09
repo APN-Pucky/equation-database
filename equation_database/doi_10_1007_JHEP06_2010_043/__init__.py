@@ -119,7 +119,7 @@ def equation_A_50(
 
 @bib()
 def bibtex():
-    bibtex: str = """
+    bibtex: str = r"""
 @article{Alioli:2010xd,
     author = "Alioli, Simone and Nason, Paolo and Oleari, Carlo and Re, Emanuele",
     title = "{A general framework for implementing NLO calculations in shower Monte Carlo programs: the POWHEG BOX}",

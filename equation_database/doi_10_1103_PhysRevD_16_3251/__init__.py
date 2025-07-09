@@ -67,7 +67,7 @@ def equation_2_9(
 
 @bib()
 def bibtex():
-    bibtex: str = """
+    bibtex: str = r"""
 @article{DeGrand:1977sy,
     author = "DeGrand, Thomas A. and Ng, Yee Jack and Tye, S. H. H.",
     title = "{Jet Structure in e+ e- Annihilation as a Test of QCD and the Quark-Confining String}",

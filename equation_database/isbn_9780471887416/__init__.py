@@ -106,7 +106,7 @@ def equation_11_35(
 
 @bib()
 def bibtex():
-    bibtex: str = """
+    bibtex: str = r"""
 @book{Halzen:1984mc,
     author = "Halzen, F. and Martin, Alan D.",
     title = "{QUARKS AND LEPTONS: AN INTRODUCTORY COURSE IN MODERN PARTICLE PHYSICS}",
