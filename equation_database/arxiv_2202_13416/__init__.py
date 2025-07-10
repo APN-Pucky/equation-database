@@ -3,6 +3,26 @@ import sympy
 from equation_database.util.doc import bib, equation
 
 
+@bib()
+def bibtex():
+    bibtex: str = r"""
+@article{Fiaschi:2022odp,
+    author = "Fiaschi, Juri and Fuks, Benjamin and Klasen, Michael and Neuwirth, Alexander",
+    title = "{Soft gluon resummation for associated squark-electroweakino production at the LHC}",
+    eprint = "2202.13416",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ph",
+    reportNumber = "MS-TP-22-05, LTH 1299",
+    doi = "10.1007/JHEP06(2022)130",
+    journal = "JHEP",
+    volume = "06",
+    pages = "130",
+    year = "2022"
+}
+"""
+    return bibtex
+
+
 @equation()
 def equation_2_4(
     M_s=sympy.Symbol("M_s"),
@@ -125,23 +145,3 @@ def equation_2_8(
         )
         / 96,
     )
-
-
-@bib()
-def bibtex():
-    bibtex: str = r"""
-@article{Fiaschi:2022odp,
-    author = "Fiaschi, Juri and Fuks, Benjamin and Klasen, Michael and Neuwirth, Alexander",
-    title = "{Soft gluon resummation for associated squark-electroweakino production at the LHC}",
-    eprint = "2202.13416",
-    archivePrefix = "arXiv",
-    primaryClass = "hep-ph",
-    reportNumber = "MS-TP-22-05, LTH 1299",
-    doi = "10.1007/JHEP06(2022)130",
-    journal = "JHEP",
-    volume = "06",
-    pages = "130",
-    year = "2022"
-}
-"""
-    return bibtex

@@ -63,6 +63,7 @@ def equation_X_Y_Z(
 
 @bib()
 def bibtex():
+    # SRC: https://where-to-download-if-not-given-in-bibtex
     bibtex: str = r"""
     ORIGINAL SOURCE AS BIBTEX ENTRY
 """
