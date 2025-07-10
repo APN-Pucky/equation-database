@@ -26,17 +26,127 @@ def equation():
             tex = tex + "\n\n    Returns:"
             for i in r:
                 tex = tex + "\n        $" + sympy.latex(i) + "$,"
-            tex = tex + "\n\n    Example:"
-            for n, i in enumerate(r):
-                tex += (
-                    "\n"
-                    + indent_string_twice(
-                        f">>> print(sympy.latex({target.__name__}()[{n}]))"
-                    )
-                    + "\n"
-                    + indent_string_twice(sympy.latex(i))
+            # tex = tex + "\n\n    Example:"
+            # for n, i in enumerate(r):
+            #    tex += (
+            #        "\n"
+            #        + indent_string_twice(
+            #            f">>> print(sympy.latex({target.__name__}()[{n}]))"
+            #        )
+            #        + "\n"
+            #        + indent_string_twice(sympy.latex(i))
+            #    )
+            #    # tex += indent_string_twice(f">>> print(sympy.mathml({target.__name__}()))") + "\n" + indent_string_twice(sympy.mathml(r))
+            tex = tex + "\n\n    .. tabs::\n\n"
+            tex += indent_string(
+                "    .. tab :: LaTeX\n\n"
+                + "        ::\n\n"
+                + "\n\n".join([indent_string(sympy.latex(i), 3) for i in r])
+            )
+            tex += indent_string(
+                "\n\n    .. tab :: MathML\n\n"
+                + "        ::\n\n"
+                + "\n\n".join([indent_string(sympy.mathml(i), 3) for i in r])
+            )
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Sympy\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join([indent_string(sympy.sstr(i), 3) for i in r])
                 )
-                # tex += indent_string_twice(f">>> print(sympy.mathml({target.__name__}()))") + "\n" + indent_string_twice(sympy.mathml(r))
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Octave\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join([indent_string(sympy.octave_code(i), 3) for i in r])
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Mathematica\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join(
+                        [indent_string(sympy.mathematica_code(i), 3) for i in r]
+                    )
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Python\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join([indent_string(sympy.pycode(i), 3) for i in r])
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: C\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join([indent_string(sympy.ccode(i), 3) for i in r])
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: C++\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join([indent_string(sympy.cxxcode(i), 3) for i in r])
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Fortran\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join([indent_string(sympy.fcode(i), 3) for i in r])
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Rust\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join([indent_string(sympy.rust_code(i), 3) for i in r])
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: ASCII\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join(
+                        [
+                            indent_string(sympy.pretty(i, use_unicode=False), 3)
+                            for i in r
+                        ]
+                    )
+                )
+            except Exception:
+                # fails for some expressions
+                pass
+            try:
+                tex += indent_string(
+                    "\n\n    .. tab :: Unicode\n\n"
+                    + "        ::\n\n"
+                    + "\n\n".join(
+                        [indent_string(sympy.pretty(i, use_unicode=True), 3) for i in r]
+                    )
+                )
+            except Exception:
+                # fails for some expressions
+                pass
         else:
             tex = tex + "\n\n    Returns:\n        $" + sympy.latex(r) + "$"
             tex = tex + "\n\n    .. tabs::\n\n"
