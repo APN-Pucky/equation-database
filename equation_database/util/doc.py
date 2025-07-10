@@ -1,5 +1,4 @@
 import inspect
-import warnings
 import sympy
 import bibtexparser
 
@@ -50,14 +49,15 @@ def equation(
             "args": args,
             "tags": tags,
         }
-        if target.__doc__ is not None:
-            # Warning that this will overwrite existing docstring
-            # Better put this information in the equation decorator metadata
-            warnings.warn(
-                f"Overwriting docstring of {target.__name__} in the future. "
-                "If you want to keep the original docstring, "
-                "use the `equation` decorator instead."
-            )
+        # TODO be strict?
+        # if target.__doc__ is not None:
+        #    # Warning that this will overwrite existing docstring
+        #    # Better put this information in the equation decorator metadata
+        #    warnings.warn(
+        #        f"Overwriting docstring of {target.__name__} in the future. "
+        #        "If you want to keep the original docstring, "
+        #        "use the `equation` decorator instead."
+        #    )
         olddoc = target.__doc__
         target.__doc__ = ""
         if summary is not None:
@@ -73,6 +73,7 @@ def equation(
             sig = inspect.signature(target)
             missing = [k for k in sig.parameters if k not in (dargs or {})]
             if missing:
+                # TODO too strict?
                 raise ValueError(f"Missing documentation for: {', '.join(missing)}")
             # Add Args section
             if not target.__doc__.endswith("\n"):
@@ -81,6 +82,7 @@ def equation(
 
             for k, v in dargs.items():
                 if k not in sig.parameters:
+                    # TODO too strict?
                     raise ValueError(f"Argument {k} not found in function signature")
                 target.__doc__ += f"        {k}: {v.description}"
                 if v.latex is not None:
