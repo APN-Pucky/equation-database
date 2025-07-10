@@ -154,7 +154,7 @@ def equation_3_5(
     ],
     description="""
     .. warning::
-        There is a typo in this equation. The sign infront of the $I_\epsilon$ term should also be negative as in :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_28`.
+        There is a typo in this equation. The sign infront of the $I_\\epsilon$ term should also be negative as in :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_28`.
     """,
 )
 def equation_3_6(

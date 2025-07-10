@@ -60,7 +60,8 @@ def bibtex():
     args = [
         Param("name", "description", "latex_name"),
         ...
-    ]
+    ],
+    tags=["tag1", "tag2"],
 )
 def equation_X_Y_Z(
     name=sympy.Symbol("name"),
