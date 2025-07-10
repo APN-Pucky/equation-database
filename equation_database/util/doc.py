@@ -1,27 +1,102 @@
+import inspect
+import warnings
 import sympy
 import bibtexparser
 
+from dataclasses import dataclass
+from typing import Optional
 
-def equation():
+
+@dataclass
+class Param:
+    name: str
+    description: str
+    latex: Optional[str] = None  # Optional: nicer rendering
+
+
+def add_latex(latex_str):
+    def decorator(func):
+        func.__doc__ = latex_str  # Optionally overwrite the docstring
+        func.__latex__ = lambda: latex_str  # Add a __latex__ method
+        return func
+
+    return decorator
+
+
+def equation(
+    summary: str = None,
+    latex=None,
+    description: str = None,
+    args: list[Param] = None,
+    tags: list[str] = None,
+    # TODO add warnings and other metadata?
+):
     """
 
     Args:
-        path: The path of the file to wrap
-        field_storage: The :class:`FileStorage` instance to wrap
-        temporary: Whether or not to delete the file when the File
-           instance is destructed
-
-    Returns:
-        BufferedFileStorage: A buffered writable file descriptor
+        summary: Short summary of the equation
+        latex: Optional LaTeX override
+        description: Longer description of the equation
+        args: List of parameters with their descriptions and optional LaTeX
+        tags: List of tags for categorization
 
     """
 
     def wrapper(target):
-        if target.__doc__ is None:
-            target.__doc__ = ""
+        target.metadata = {
+            "summary": summary,
+            "description": description,
+            "latex": latex,
+            "args": args,
+            "tags": tags,
+        }
+        if target.__doc__ is not None:
+            # Warning that this will overwrite existing docstring
+            # Better put this information in the equation decorator metadata
+            warnings.warn(
+                f"Overwriting docstring of {target.__name__} in the future. "
+                "If you want to keep the original docstring, "
+                "use the `equation` decorator instead."
+            )
+        olddoc = target.__doc__
+        target.__doc__ = ""
+        if summary is not None:
+            target.__doc__ += f"{summary}"
+        if latex is not None:
+            target.__doc__ += "$$" + latex + "$$\n"
+            target.__latex__ = latex
+        if description is not None:
+            target.__doc__ += f"\n\n{description}\n"
+        target.__doc__ += olddoc or ""
+        if args is not None:
+            dargs = {k.name: k for k in args}
+            sig = inspect.signature(target)
+            missing = [k for k in sig.parameters if k not in (dargs or {})]
+            if missing:
+                raise ValueError(f"Missing documentation for: {', '.join(missing)}")
+            # Add Args section
+            if not target.__doc__.endswith("\n"):
+                target.__doc__ += "\n"
+            target.__doc__ += "\n    Args:\n"
+
+            for k, v in dargs.items():
+                if k not in sig.parameters:
+                    raise ValueError(f"Argument {k} not found in function signature")
+                target.__doc__ += f"        {k}: {v.description}"
+                if v.latex is not None:
+                    target.__doc__ += f"(${v.latex}$)"
+                target.__doc__ += "\n\n"
+
+        if tags:
+            if not target.__doc__.endswith("\n"):
+                target.__doc__ += "\n"
+            target.__doc__ += "\n\n    :keywords: " + ", ".join(tags) + "\n"
+
         r = target()
         # if array loop
         tex = ""
+        if not isinstance(r, tuple):
+            r = (r,)
         if isinstance(r, tuple):
             tex = tex + "\n\n    Returns:"
             for i in r:
@@ -37,9 +112,15 @@ def equation():
             #        + indent_string_twice(sympy.latex(i))
             #    )
             #    # tex += indent_string_twice(f">>> print(sympy.mathml({target.__name__}()))") + "\n" + indent_string_twice(sympy.mathml(r))
-            tex = tex + "\n\n    .. tabs::\n\n"
+            tex = tex + "\n\n    .. tabs::"
+            if latex is not None:
+                tex += indent_string(
+                    "\n\n    .. tab :: Original LaTeX\n\n"
+                    + "        ::\n\n"
+                    + indent_string(latex, 3)
+                )
             tex += indent_string(
-                "    .. tab :: LaTeX\n\n"
+                "\n\n    .. tab :: LaTeX\n\n"
                 + "        ::\n\n"
                 + "\n\n".join([indent_string(sympy.latex(i), 3) for i in r])
             )
@@ -143,109 +224,6 @@ def equation():
                     + "\n\n".join(
                         [indent_string(sympy.pretty(i, use_unicode=True), 3) for i in r]
                     )
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-        else:
-            tex = tex + "\n\n    Returns:\n        $" + sympy.latex(r) + "$"
-            tex = tex + "\n\n    .. tabs::\n\n"
-            tex += indent_string(
-                "    .. tab :: LaTeX\n\n"
-                + "        ::\n\n"
-                + indent_string(sympy.latex(r), 3)
-            )
-            tex += indent_string(
-                "\n\n    .. tab :: MathML\n\n"
-                + "        ::\n\n"
-                + indent_string(sympy.mathml(r), 3)
-            )
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: Sympy\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.sstr(r), 3)
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: Octave\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.octave_code(r), 3)
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: Mathematica\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.mathematica_code(r), 3)
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: Python\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.pycode(r), 3)
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: C\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.ccode(r), 3)
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: C++\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.cxxcode(r), 3)
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: Fortran\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.fcode(r), 3)
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: Rust\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.rust_code(r), 3)
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: ASCII\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.pretty(r, use_unicode=False), 3)
-                )
-            except Exception:
-                # fails for some expressions
-                pass
-            try:
-                tex += indent_string(
-                    "\n\n    .. tab :: Unicode\n\n"
-                    + "        ::\n\n"
-                    + indent_string(sympy.pretty(r, use_unicode=True), 3)
                 )
             except Exception:
                 # fails for some expressions
