@@ -22,24 +22,31 @@ This project is a database of equations that can be used in various fields of sc
 The minimum requirement for a contribution is:
 
 ```python
-@equation(
-    latex="...",
-)
-def equation_X_Y_Z():
-    raise NotImplementedError("This equation is not implemented in sympy yet.")
-
-
 @bib()
 def bibtex():
     bibtex: str = r"""
     ORIGINAL SOURCE AS BIBTEX ENTRY
 """
     return bibtex
+
+@equation(
+    latex="...",
+)
+def equation_X_Y_Z():
+    raise NotImplementedError("This equation is not implemented in sympy yet.")
+
 ```
 
-the ideal contribution however adds more information:
+The ideal contribution however adds more information:
 
 ```python
+@bib()
+def bibtex():
+    # SRC: https://where-to-download-if-not-given-in-bibtex
+    bibtex: str = r"""
+    ORIGINAL SOURCE AS BIBTEX ENTRY
+"""
+
 @equation(
     summary="...",
     latex="...",
@@ -60,12 +67,4 @@ def equation_X_Y_Z(
     ...
 ):
     return sympy.Eq(name, name)
-
-@bib()
-def bibtex():
-    # SRC: https://where-to-download-if-not-given-in-bibtex
-    bibtex: str = r"""
-    ORIGINAL SOURCE AS BIBTEX ENTRY
-"""
-
-    ```
+```

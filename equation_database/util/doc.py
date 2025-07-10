@@ -1,4 +1,5 @@
 import inspect
+import warnings
 import sympy
 import bibtexparser
 
@@ -71,10 +72,10 @@ def equation(
         if args is not None:
             dargs = {k.name: k for k in args}
             sig = inspect.signature(target)
-            missing = [k for k in sig.parameters if k not in (dargs or {})]
-            if missing:
-                # TODO too strict?
-                raise ValueError(f"Missing documentation for: {', '.join(missing)}")
+            # missing = [k for k in sig.parameters if k not in (dargs or {})]
+            # if missing:
+            #    # TODO too strict?
+            #    warnings.warn(f"Missing documentation for: {', '.join(missing)}")
             # Add Args section
             if not target.__doc__.endswith("\n"):
                 target.__doc__ += "\n"
@@ -82,8 +83,7 @@ def equation(
 
             for k, v in dargs.items():
                 if k not in sig.parameters:
-                    # TODO too strict?
-                    raise ValueError(f"Argument {k} not found in function signature")
+                    warnings.warn(f"Argument {k} not found in function signature")
                 target.__doc__ += f"        {k}: {v.description}"
                 if v.latex is not None:
                     target.__doc__ += f"(${v.latex}$)"

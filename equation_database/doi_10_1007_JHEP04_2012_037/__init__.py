@@ -1,38 +1,65 @@
 from sympy import Symbol, Function, log, Eq, Sum, Rational, pi
 from equation_database.util.math import Li2
-from equation_database.util.doc import bib, equation
+from equation_database.util.doc import Param, bib, equation
 
 
-@equation()
+@bib()
+def bibtex():
+    bibtex: str = r"""
+@article{Barze:2012tt,
+    author = "Barze, Luca and Montagna, Guido and Nason, Paolo and Nicrosini, Oreste and Piccinini, Fulvio",
+    title = "{Implementation of electroweak corrections in the POWHEG BOX: single W production}",
+    eprint = "1202.0465",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ph",
+    reportNumber = "CERN-PH-TH-2012-025, FNT-2012-01, LPN12-031",
+    doi = "10.1007/JHEP04(2012)037",
+    journal = "JHEP",
+    volume = "04",
+    pages = "037",
+    year = "2012"
+}
+    """
+    return bibtex
+
+
+@equation(
+    summary="One of the singular contributions to the EW virtual part",
+    args=[
+        Param(
+            "mathcal_Q_EW",
+            "one of the singular contributions to the EW virtual part",
+            r"\mathcal{Q}_{EW}",
+        ),
+        Param("s", "Mandel stamm variable s", "s"),
+        Param("q", "charge of a particle", "q"),
+        Param("Q_EW", "energy scale of the process", r"Q_{EW}"),
+        Param(
+            "beta",
+            "magnitude of the particles three momentum divided by the energy/0-component of the four vector.",
+            "beta",
+        ),
+        Param("xi_C", "arbitrary parameter (e.g. set to one)", "xi_C"),
+        Param("mu_F", "factorization scale", r"\mu_F"),
+        Param("i", "index of the i final state particle", "i"),
+        Param("f_plus", "index of the plus incoming particle", r"f_+"),
+        Param("f_minus", "index of the minus incoming particle", r"f_-"),
+        Param("n_final", "number of final state particles", r"n_{\mathrm final}"),
+    ],
+)
 def equation_3_4(
-    mathcal_Q_EW=Symbol(r"\mathcal{Q}_{EW}"),
+    mathcal_Q_EW=Symbol(r"mathcal_Q_EW"),
     s=Symbol("s"),
     q=Function("q"),
-    Q_EW=Symbol(r"Q_{EW}"),
+    Q_EW=Symbol(r"Q_EW"),
     beta=Function("beta"),
     xi_C=Symbol("xi_C"),
-    mu_F=Symbol(r"\mu_F"),
+    mu_F=Symbol(r"mu_F"),
     i=Symbol("i"),
-    f_plus=Symbol("f_+"),
-    f_minus=Symbol("f_-"),
-    n_final=Symbol(r"n_{\mathrm final}"),
+    f_plus=Symbol("f_plus"),
+    f_minus=Symbol("f_minus"),
+    n_final=Symbol(r"n_final"),
 ):
-    """
-    One of the singular contributions to the EW virtual part.
-
-    Args:
-        mathcal_Q_EW : one of the singular contributions to the EW virtual part
-        s            : Mandelstamm variable s
-        q            : charge of a particle
-        Q_EW         : energy scale of the process
-        beta         : magnitude of the particles three momentum divided by the energy/0-component of the four vector.
-        xi_C         : arbitrary parameter (e.g. set to one)
-        mu_F         : factorization scale
-        i            : index of the i final state particle
-        f_plus       : index of the plus incoming particle
-        f_minus      : index of the minus incoming particle
-        n_final      : number of final state particles
-    """
     return Eq(
         mathcal_Q_EW,
         -Sum(
@@ -100,37 +127,52 @@ def equation_3_5(
     )
 
 
-@equation()
+@equation(
+    args=[
+        Param(
+            "I_0",
+            "see :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_23`",
+            r"I_0",
+        ),
+        Param(
+            "I_epsilon",
+            "see :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_24`",
+            r"I_\epsilon",
+        ),
+        Param("m", "index of the m massive particle", r"m"),
+        Param("l", "index of the l massless particle", r"l"),
+        Param(
+            "n_massless",
+            "number of (charged implied by equation) massless particles",
+            r"n_{\mathrm massless}",
+        ),
+        Param(
+            "n_massive",
+            "number of (charged implied by equation) massive particles",
+            r"n_{\mathrm massive}",
+        ),
+    ],
+    description="""
+    .. warning::
+        There is a typo in this equation. The sign infront of the $I_\epsilon$ term should also be negative as in :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_28`.
+    """,
+)
 def equation_3_6(
-    mathcal_J=Symbol(r"\mathcal{J}"),
+    mathcal_J=Symbol(r"mathcal_J"),
     q=Function("q"),
     k=Function("k"),
     E=Function("E"),
-    sigma=Function(r"\sigma"),
+    sigma=Function(r"sigma"),
     s=Symbol("s"),
-    Q_EW=Symbol(r"Q_{EW}"),
+    Q_EW=Symbol(r"Q_EW"),
     xi_C=Symbol("xi_C"),
     I_0=Function("I_0"),
-    I_epsilon=Function(r"I_\epsilon"),
+    I_epsilon=Function(r"I_epsilon"),
     m=Symbol("m"),
     l=Symbol("l"),  # noqa: E741
-    n_massless=Symbol(r"n_{\mathrm massless}"),
-    n_massive=Symbol(r"n_{\mathrm massive}"),
+    n_massless=Symbol(r"n_massless"),
+    n_massive=Symbol(r"n_massive"),
 ):
-    """
-
-    Args:
-        I_0          : (see :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_23`)
-        I_epsilon    : (see :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_24`)
-        m            : index of the m massive particle
-        l            : index of the l massless particle
-        n_massless   : number of (charged implied by equation) massless particles
-        n_massive    : number of (charged implied by equation) massive particles
-
-    .. warning::
-        There is a typo in this equation. The sign infront of the I_\epsilon term should also be negative as in :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_28`.
-
-    """
     return Eq(
         mathcal_J,
         -Rational(1, 2)
@@ -153,7 +195,25 @@ def equation_3_6(
     )
 
 
-@equation()
+@equation(
+    args=[
+        Param(
+            "I_0",
+            "see :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_41`",
+            r"I_0",
+        ),
+        Param(
+            "I_epsilon",
+            "see :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_50`",
+            r"I_\epsilon",
+        ),
+        Param(
+            "n_massive",
+            "number of (charged implied by equation) massive particles",
+            r"n_{\mathrm massive}",
+        ),
+    ]
+)
 def equation_3_7(
     mathcal_K=Symbol(r"\mathcal{K}"),
     q=Function("q"),
@@ -169,13 +229,6 @@ def equation_3_7(
     I_epsilon=Function(r"I_\epsilon"),
     n_massive=Symbol(r"n_{\mathrm massive}"),
 ):
-    """
-
-    Args:
-        I_0 : (see :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_41`)
-        I_epsilon : (see :func:`~equation_database.doi_10_1007_JHEP06_2010_043.equation_A_50`)
-        n_massive    : number of (charged implied by equation) massive particles
-    """
     return Eq(
         mathcal_K,
         -Rational(1, 2)
@@ -194,23 +247,3 @@ def equation_3_7(
             (n, 1, n_massive),
         ),
     )
-
-
-@bib()
-def bibtex():
-    bibtex: str = r"""
-@article{Barze:2012tt,
-    author = "Barze, Luca and Montagna, Guido and Nason, Paolo and Nicrosini, Oreste and Piccinini, Fulvio",
-    title = "{Implementation of electroweak corrections in the POWHEG BOX: single W production}",
-    eprint = "1202.0465",
-    archivePrefix = "arXiv",
-    primaryClass = "hep-ph",
-    reportNumber = "CERN-PH-TH-2012-025, FNT-2012-01, LPN12-031",
-    doi = "10.1007/JHEP04(2012)037",
-    journal = "JHEP",
-    volume = "04",
-    pages = "037",
-    year = "2012"
-}
-    """
-    return bibtex
