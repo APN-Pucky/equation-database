@@ -45,7 +45,7 @@ def equation_2_12(
 
 
 @equation(
-    latex=r"\rho = \frac{W_\text{pair}}{W_\gamma} = \frac{2 \alpha}{3 \pi}     \int_{2m_e}^E \,\mathrm{d}{M_{ee}} \left(\frac{k'}{k}\right) \frac{(E+M_R)^2 + M_R^2 -M_{ee}^2}{(E+M_R)^2 + M_R^2}    \\\cdot    \sqrt{ 1 - \frac{4 m_e^2}{M_{ee}^2}} \left( 1 + \frac{2 m_e^2}{M_{ee}^2}\right)    \left[ \frac{R_T}{M_{ee}} + \frac{2(E+M_R)^2 M_{ee} }{(2EM_R +E^2 + M_{ee}^2)^2}R_L\right]"
+    latex=r"\rho = \frac{W_{\text{pair}}}{W_{\gamma}} = \frac{2 \alpha}{3 \pi}     \int_{2m_e}^E \,\mathrm{d}{M_{ee}} \left(\frac{k'}{k}\right) \frac{(E+M_R)^2 + M_R^2 -M_{ee}^2}{(E+M_R)^2 + M_R^2}    \\\cdot    \sqrt{ 1 - \frac{4 m_e^2}{M_{ee}^2}} \left( 1 + \frac{2 m_e^2}{M_{ee}^2}\right)    \left[ \frac{R_T}{M_{ee}} + \frac{2(E+M_R)^2 M_{ee} }{(2EM_R +E^2 + M_{ee}^2)^2}R_L\right]"
 )
 def equation_2_1(
     rho=sympy.Symbol("rho"),
