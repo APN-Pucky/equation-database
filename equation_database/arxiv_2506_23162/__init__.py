@@ -18,32 +18,6 @@ def bibtex():
     return bibtex
 
 
-@equation(latex=r"p = p_1 + p_2")
-def equation_2_10(
-    p_1=sympy.Symbol("p_1"),
-    p_2=sympy.Symbol("p_2"),
-):
-    return p_1 + p_2
-
-
-@equation(latex=r"p_1 = z p + k_T")
-def equation_2_11(
-    k_T=sympy.Symbol("k_T"),
-    p=sympy.Symbol("p"),
-    z=sympy.Symbol("z"),
-):
-    return k_T + p * z
-
-
-@equation(latex=r"p_2 = (1-z) p - k_T")
-def equation_2_12(
-    k_T=sympy.Symbol("k_T"),
-    p=sympy.Symbol("p"),
-    z=sympy.Symbol("z"),
-):
-    return -k_T + p * (1 - z)
-
-
 @equation(
     latex=r"\rho = \frac{W_{\text{pair}}}{W_{\gamma}} = \frac{2 \alpha}{3 \pi}     \int_{2m_e}^E \,\mathrm{d}{M_{ee}} \left(\frac{k'}{k}\right) \frac{(E+M_R)^2 + M_R^2 -M_{ee}^2}{(E+M_R)^2 + M_R^2}    \\\cdot    \sqrt{ 1 - \frac{4 m_e^2}{M_{ee}^2}} \left( 1 + \frac{2 m_e^2}{M_{ee}^2}\right)    \left[ \frac{R_T}{M_{ee}} + \frac{2(E+M_R)^2 M_{ee} }{(2EM_R +E^2 + M_{ee}^2)^2}R_L\right]"
 )
@@ -77,6 +51,192 @@ def equation_2_1(
         2 * alpha / (3 * sympy.pi) * sympy.Integral(integrand, (M_ee, 2 * m_e, E))
     )
     return (sympy.Eq(rho, ratio), sympy.Eq(ratio, integral_form))
+
+
+@equation(
+    latex=r"\frac{1}{N_{\gamma^*}} \frac{\,\mathrm{d} N_{ee}}{\,\mathrm{d} M_{ee}} = \frac{2 \alpha}{3 \pi} \frac{1}{M_{ee}} \sqrt{ 1 - \frac{4 m_e^2}{M_{ee}^2}} \left( 1 + \frac{2 m_e^2}{M_{ee}^2}\right)S\approx \frac{1}{M_{ee}}"
+)
+def equation_2_2(
+    N_gamma_star=sympy.Symbol("N_gamma_star"),
+    dN_ee=sympy.Symbol("dN_ee"),
+    dM_ee=sympy.Symbol("dM_ee"),
+    alpha=sympy.Symbol("alpha"),
+    M_ee=sympy.Symbol("M_ee"),
+    m_e=sympy.Symbol("m_e"),
+    S=sympy.Symbol("S"),
+):
+    lhs = (1 / N_gamma_star) * (dN_ee / dM_ee)
+    middle = (
+        2
+        * alpha
+        / (3 * sympy.pi)
+        * (1 / M_ee)
+        * sympy.sqrt(1 - 4 * m_e**2 / M_ee**2)
+        * (1 + 2 * m_e**2 / M_ee**2)
+        * S
+    )
+    rhs = 1 / M_ee
+    return (sympy.Eq(lhs, middle), sympy.Eq(middle, rhs))
+
+
+@equation(
+    latex=r"\frac{\,\mathrm{d}^2 N_{ee}}{\,\mathrm{d} M_{ee}^2} = \frac{\alpha}{3 \pi} \frac{1}{M_{ee}^2}  \sqrt{ 1 - \frac{4 m_e^2}{M_{ee}^2}} \left( 1 + \frac{2 m_e^2}{M_{ee}^2}\right) \,\mathrm{d} N_{\gamma^*}"
+)
+def equation_2_3(
+    d2N_ee=sympy.Symbol("d2N_ee"),
+    dM_ee_sq=sympy.Symbol("dM_ee_sq"),
+    alpha=sympy.Symbol("alpha"),
+    M_ee=sympy.Symbol("M_ee"),
+    m_e=sympy.Symbol("m_e"),
+    dN_gamma_star=sympy.Symbol("dN_gamma_star"),
+):
+    lhs = d2N_ee / dM_ee_sq
+    rhs = (
+        alpha
+        / (3 * sympy.pi)
+        * (1 / M_ee**2)
+        * sympy.sqrt(1 - 4 * m_e**2 / M_ee**2)
+        * (1 + 2 * m_e**2 / M_ee**2)
+        * dN_gamma_star
+    )
+    return sympy.Eq(lhs, rhs)
+
+
+@equation(
+    latex=r"\frac{\,\mathrm{d} \mathcal P_{\gamma \to ee}}{\,\mathrm{d} M_{ee}^2}  =\frac{\alpha e_e^2}{3\pi} \frac{1}{M_{ee}^2}  \left( 1 - \frac{M_{ee}^2}{s}\right)^3"
+)
+def equation_2_31(
+    dP_gamma_to_ee=sympy.Symbol("dP_gamma_to_ee"),
+    dM_ee_sq=sympy.Symbol("dM_ee_sq"),
+    alpha=sympy.Symbol("alpha"),
+    e_e=sympy.Symbol("e_e"),
+    M_ee=sympy.Symbol("M_ee"),
+    s=sympy.Symbol("s"),
+):
+    lhs = dP_gamma_to_ee / dM_ee_sq
+    rhs = alpha * e_e**2 / (3 * sympy.pi) * (1 / M_ee**2) * (1 - M_ee**2 / s) ** 3
+    return sympy.Eq(lhs, rhs)
+
+
+@equation(
+    latex=r"\approx \frac{\alpha}{3\pi} \frac{1}{M_{ee}^2} \left( 1 - 6 \frac{m_e^4}{M_{ee}^4} - 8 \frac{m_e^6}{M_{ee}^6} \right)  \,\mathrm{d} N_{\gamma^*}"
+)
+def equation_2_4(
+    alpha=sympy.Symbol("alpha"),
+    M_ee=sympy.Symbol("M_ee"),
+    m_e=sympy.Symbol("m_e"),
+    dN_gamma_star=sympy.Symbol("dN_gamma_star"),
+):
+    rhs = (
+        alpha
+        / (3 * sympy.pi)
+        * (1 / M_ee**2)
+        * (1 - 6 * m_e**4 / M_ee**4 - 8 * m_e**6 / M_ee**6)
+        * dN_gamma_star
+    )
+    return rhs
+
+
+@equation(latex=r"P_{g \to qq}(z) =  T_F ( z^2 + (1-z)^2)")
+def equation_2_5(
+    P_g_to_qq=sympy.Function("P_g_to_qq"),
+    T_F=sympy.Symbol("T_F"),
+    z=sympy.Symbol("z"),
+):
+    rhs = T_F * (z**2 + (1 - z) ** 2)
+    return sympy.Eq(P_g_to_qq(z), rhs)
+
+
+@equation(latex=r"P_{\gamma \to ee}(z) =  e_e^2 ( z^2 + (1-z)^2)")
+def equation_2_6(
+    P_gamma_to_ee=sympy.Function("P_gamma_to_ee"),
+    e_e=sympy.Symbol("e_e"),
+    z=sympy.Symbol("z"),
+):
+    rhs = e_e**2 * (z**2 + (1 - z) ** 2)
+    return sympy.Eq(P_gamma_to_ee(z), rhs)
+
+
+@equation(
+    latex=r"\,\mathrm{d} \mathcal P_{\gamma \to ee} = \frac{\alpha}{2\pi} \frac{\,\mathrm{d} Q^2}{Q^2}  P_{\gamma \to ee}(z) \,\mathrm{d} z"
+)
+def equation_2_7(
+    dP_gamma_to_ee=sympy.Symbol("dP_gamma_to_ee"),
+    alpha=sympy.Symbol("alpha"),
+    dQ_sq=sympy.Symbol("dQ_sq"),
+    Q=sympy.Symbol("Q"),
+    P_gamma_to_ee=sympy.Function("P_gamma_to_ee"),
+    z=sympy.Symbol("z"),
+    dz=sympy.Symbol("dz"),
+):
+    rhs = alpha / (2 * sympy.pi) * (dQ_sq / Q**2) * P_gamma_to_ee(z) * dz
+    return sympy.Eq(dP_gamma_to_ee, rhs)
+
+
+@equation(
+    latex=r"\frac{\,\mathrm{d} \mathcal P_{\gamma \to ee}}{\,\mathrm{d} M_{ee}^2} = \frac{\alpha}{2\pi} \frac{1}{M_{ee}^2}  P_{\gamma \to ee}(z) \,\mathrm{d} z"
+)
+def equation_2_8(
+    dP_gamma_to_ee=sympy.Symbol("dP_gamma_to_ee"),
+    dM_ee_sq=sympy.Symbol("dM_ee_sq"),
+    alpha=sympy.Symbol("alpha"),
+    M_ee=sympy.Symbol("M_ee"),
+    P_gamma_to_ee=sympy.Function("P_gamma_to_ee"),
+    z=sympy.Symbol("z"),
+    dz=sympy.Symbol("dz"),
+):
+    lhs = dP_gamma_to_ee / dM_ee_sq
+    rhs = alpha / (2 * sympy.pi) * (1 / M_ee**2) * P_gamma_to_ee(z) * dz
+    return sympy.Eq(lhs, rhs)
+
+
+@equation(
+    latex=r"\frac{\,\mathrm{d} \mathcal P_{\gamma \to ee}}{\,\mathrm{d} M_{ee}^2}  = \frac{\alpha}{2\pi} \frac{1}{M_{ee}^2}  \int_{y_{-}}^{y_+}P_{\gamma \to ee}(z) \,\mathrm{d} z"
+)
+def equation_2_9(
+    dP_gamma_to_ee=sympy.Symbol("dP_gamma_to_ee"),
+    dM_ee_sq=sympy.Symbol("dM_ee_sq"),
+    alpha=sympy.Symbol("alpha"),
+    M_ee=sympy.Symbol("M_ee"),
+    y_minus=sympy.Symbol("y_minus"),
+    y_plus=sympy.Symbol("y_plus"),
+    P_gamma_to_ee=sympy.Function("P_gamma_to_ee"),
+    z=sympy.Symbol("z"),
+):
+    lhs = dP_gamma_to_ee / dM_ee_sq
+    rhs = (
+        alpha
+        / (2 * sympy.pi)
+        * (1 / M_ee**2)
+        * sympy.Integral(P_gamma_to_ee(z), (z, y_minus, y_plus))
+    )
+    return sympy.Eq(lhs, rhs)
+
+
+@equation(latex=r"p = p_1 + p_2")
+def equation_2_10(
+    p_1=sympy.Symbol("p_1"),
+    p_2=sympy.Symbol("p_2"),
+):
+    return p_1 + p_2
+
+
+@equation(latex=r"p_1 = z p + k_T")
+def equation_2_11(
+    k_T=sympy.Symbol("k_T"),
+    p=sympy.Symbol("p"),
+    z=sympy.Symbol("z"),
+):
+    return k_T + p * z
+
+
+@equation(latex=r"p_2 = (1-z) p - k_T")
+def equation_2_12(
+    k_T=sympy.Symbol("k_T"),
+    p=sympy.Symbol("p"),
+    z=sympy.Symbol("z"),
+):
+    return -k_T + p * (1 - z)
 
 
 @equation(
@@ -199,32 +359,6 @@ def equation_2_19(
 ):
     rhs = e_e**2 * (1 - 2 * z + 2 * z**2 + 2 * m_e**2 / M_ee**2)
     return sympy.Eq(P_gamma_to_ee, rhs)
-
-
-@equation(
-    latex=r"\frac{1}{N_{\gamma^*}} \frac{\,\mathrm{d} N_{ee}}{\,\mathrm{d} M_{ee}} = \frac{2 \alpha}{3 \pi} \frac{1}{M_{ee}} \sqrt{ 1 - \frac{4 m_e^2}{M_{ee}^2}} \left( 1 + \frac{2 m_e^2}{M_{ee}^2}\right)S\approx \frac{1}{M_{ee}}"
-)
-def equation_2_2(
-    N_gamma_star=sympy.Symbol("N_gamma_star"),
-    dN_ee=sympy.Symbol("dN_ee"),
-    dM_ee=sympy.Symbol("dM_ee"),
-    alpha=sympy.Symbol("alpha"),
-    M_ee=sympy.Symbol("M_ee"),
-    m_e=sympy.Symbol("m_e"),
-    S=sympy.Symbol("S"),
-):
-    lhs = (1 / N_gamma_star) * (dN_ee / dM_ee)
-    middle = (
-        2
-        * alpha
-        / (3 * sympy.pi)
-        * (1 / M_ee)
-        * sympy.sqrt(1 - 4 * m_e**2 / M_ee**2)
-        * (1 + 2 * m_e**2 / M_ee**2)
-        * S
-    )
-    rhs = 1 / M_ee
-    return (sympy.Eq(lhs, middle), sympy.Eq(middle, rhs))
 
 
 @equation(
@@ -418,137 +552,3 @@ def equation_2_29(
     y_minus_val = -sqrt_term + common_term
 
     return (sympy.Eq(y_plus, y_plus_val), sympy.Eq(y_minus, y_minus_val))
-
-
-@equation(
-    latex=r"\frac{\,\mathrm{d}^2 N_{ee}}{\,\mathrm{d} M_{ee}^2} = \frac{\alpha}{3 \pi} \frac{1}{M_{ee}^2}  \sqrt{ 1 - \frac{4 m_e^2}{M_{ee}^2}} \left( 1 + \frac{2 m_e^2}{M_{ee}^2}\right) \,\mathrm{d} N_{\gamma^*}"
-)
-def equation_2_3(
-    d2N_ee=sympy.Symbol("d2N_ee"),
-    dM_ee_sq=sympy.Symbol("dM_ee_sq"),
-    alpha=sympy.Symbol("alpha"),
-    M_ee=sympy.Symbol("M_ee"),
-    m_e=sympy.Symbol("m_e"),
-    dN_gamma_star=sympy.Symbol("dN_gamma_star"),
-):
-    lhs = d2N_ee / dM_ee_sq
-    rhs = (
-        alpha
-        / (3 * sympy.pi)
-        * (1 / M_ee**2)
-        * sympy.sqrt(1 - 4 * m_e**2 / M_ee**2)
-        * (1 + 2 * m_e**2 / M_ee**2)
-        * dN_gamma_star
-    )
-    return sympy.Eq(lhs, rhs)
-
-
-@equation(
-    latex=r"\frac{\,\mathrm{d} \mathcal P_{\gamma \to ee}}{\,\mathrm{d} M_{ee}^2}  =\frac{\alpha e_e^2}{3\pi} \frac{1}{M_{ee}^2}  \left( 1 - \frac{M_{ee}^2}{s}\right)^3"
-)
-def equation_2_31(
-    dP_gamma_to_ee=sympy.Symbol("dP_gamma_to_ee"),
-    dM_ee_sq=sympy.Symbol("dM_ee_sq"),
-    alpha=sympy.Symbol("alpha"),
-    e_e=sympy.Symbol("e_e"),
-    M_ee=sympy.Symbol("M_ee"),
-    s=sympy.Symbol("s"),
-):
-    lhs = dP_gamma_to_ee / dM_ee_sq
-    rhs = alpha * e_e**2 / (3 * sympy.pi) * (1 / M_ee**2) * (1 - M_ee**2 / s) ** 3
-    return sympy.Eq(lhs, rhs)
-
-
-@equation(
-    latex=r"\approx \frac{\alpha}{3\pi} \frac{1}{M_{ee}^2} \left( 1 - 6 \frac{m_e^4}{M_{ee}^4} - 8 \frac{m_e^6}{M_{ee}^6} \right)  \,\mathrm{d} N_{\gamma^*}"
-)
-def equation_2_4(
-    alpha=sympy.Symbol("alpha"),
-    M_ee=sympy.Symbol("M_ee"),
-    m_e=sympy.Symbol("m_e"),
-    dN_gamma_star=sympy.Symbol("dN_gamma_star"),
-):
-    rhs = (
-        alpha
-        / (3 * sympy.pi)
-        * (1 / M_ee**2)
-        * (1 - 6 * m_e**4 / M_ee**4 - 8 * m_e**6 / M_ee**6)
-        * dN_gamma_star
-    )
-    return rhs
-
-
-@equation(latex=r"P_{g \to qq}(z) =  T_F ( z^2 + (1-z)^2)")
-def equation_2_5(
-    P_g_to_qq=sympy.Function("P_g_to_qq"),
-    T_F=sympy.Symbol("T_F"),
-    z=sympy.Symbol("z"),
-):
-    rhs = T_F * (z**2 + (1 - z) ** 2)
-    return sympy.Eq(P_g_to_qq(z), rhs)
-
-
-@equation(latex=r"P_{\gamma \to ee}(z) =  e_e^2 ( z^2 + (1-z)^2)")
-def equation_2_6(
-    P_gamma_to_ee=sympy.Function("P_gamma_to_ee"),
-    e_e=sympy.Symbol("e_e"),
-    z=sympy.Symbol("z"),
-):
-    rhs = e_e**2 * (z**2 + (1 - z) ** 2)
-    return sympy.Eq(P_gamma_to_ee(z), rhs)
-
-
-@equation(
-    latex=r"\,\mathrm{d} \mathcal P_{\gamma \to ee} = \frac{\alpha}{2\pi} \frac{\,\mathrm{d} Q^2}{Q^2}  P_{\gamma \to ee}(z) \,\mathrm{d} z"
-)
-def equation_2_7(
-    dP_gamma_to_ee=sympy.Symbol("dP_gamma_to_ee"),
-    alpha=sympy.Symbol("alpha"),
-    dQ_sq=sympy.Symbol("dQ_sq"),
-    Q=sympy.Symbol("Q"),
-    P_gamma_to_ee=sympy.Function("P_gamma_to_ee"),
-    z=sympy.Symbol("z"),
-    dz=sympy.Symbol("dz"),
-):
-    rhs = alpha / (2 * sympy.pi) * (dQ_sq / Q**2) * P_gamma_to_ee(z) * dz
-    return sympy.Eq(dP_gamma_to_ee, rhs)
-
-
-@equation(
-    latex=r"\frac{\,\mathrm{d} \mathcal P_{\gamma \to ee}}{\,\mathrm{d} M_{ee}^2} = \frac{\alpha}{2\pi} \frac{1}{M_{ee}^2}  P_{\gamma \to ee}(z) \,\mathrm{d} z"
-)
-def equation_2_8(
-    dP_gamma_to_ee=sympy.Symbol("dP_gamma_to_ee"),
-    dM_ee_sq=sympy.Symbol("dM_ee_sq"),
-    alpha=sympy.Symbol("alpha"),
-    M_ee=sympy.Symbol("M_ee"),
-    P_gamma_to_ee=sympy.Function("P_gamma_to_ee"),
-    z=sympy.Symbol("z"),
-    dz=sympy.Symbol("dz"),
-):
-    lhs = dP_gamma_to_ee / dM_ee_sq
-    rhs = alpha / (2 * sympy.pi) * (1 / M_ee**2) * P_gamma_to_ee(z) * dz
-    return sympy.Eq(lhs, rhs)
-
-
-@equation(
-    latex=r"\frac{\,\mathrm{d} \mathcal P_{\gamma \to ee}}{\,\mathrm{d} M_{ee}^2}  = \frac{\alpha}{2\pi} \frac{1}{M_{ee}^2}  \int_{y_{-}}^{y_+}P_{\gamma \to ee}(z) \,\mathrm{d} z"
-)
-def equation_2_9(
-    dP_gamma_to_ee=sympy.Symbol("dP_gamma_to_ee"),
-    dM_ee_sq=sympy.Symbol("dM_ee_sq"),
-    alpha=sympy.Symbol("alpha"),
-    M_ee=sympy.Symbol("M_ee"),
-    y_minus=sympy.Symbol("y_minus"),
-    y_plus=sympy.Symbol("y_plus"),
-    P_gamma_to_ee=sympy.Function("P_gamma_to_ee"),
-    z=sympy.Symbol("z"),
-):
-    lhs = dP_gamma_to_ee / dM_ee_sq
-    rhs = (
-        alpha
-        / (2 * sympy.pi)
-        * (1 / M_ee**2)
-        * sympy.Integral(P_gamma_to_ee(z), (z, y_minus, y_plus))
-    )
-    return sympy.Eq(lhs, rhs)

@@ -77,6 +77,8 @@ autosummary_imported_members = False
 autoapi_type = "python"
 autoapi_dirs = ["../../equation_database"]
 autoapi_python_class_content = "both"
+autodoc_member_order = "bysource"
+autoapi_member_order = "bysource"
 
 autodoc_default_options = {
     "private-members": False,
@@ -105,10 +107,6 @@ math_dollar_node_blacklist = (
 # print(NODE_BLACKLIST)
 
 
-def setup(app):
-    app.add_js_file("sync-tabs.js")
-
-
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
@@ -118,3 +116,7 @@ html_static_path = ["_static"]
 html_css_files = [
     "style.css",
 ]
+
+
+def setup(app):
+    app.add_js_file("sync-tabs.js")
